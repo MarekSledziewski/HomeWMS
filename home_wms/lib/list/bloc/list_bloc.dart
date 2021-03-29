@@ -12,6 +12,12 @@ class ListBloc extends Bloc<ListEvent, ListState> {
 
   @override
   Stream<ListState> mapEventToState(ListEvent event) async* {
-    // TODO: Add your event logic
+    if (event is GetSearchEvent) 
+    {
+  
+    }
+
+    if (event is LoadItemsEvent) {
+    }
   }
 }

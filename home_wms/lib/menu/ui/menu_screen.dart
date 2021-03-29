@@ -32,11 +32,11 @@ class MenuScreenState extends State<MenuScreen> {
     super.dispose();
   }
 
-  Widget buildBlocBuilder() =>BlocBuilder<MenuBloc, MenuState>(
+  Widget buildBlocBuilder() => BlocBuilder<MenuBloc, MenuState>(
         builder: (context, state) {
           if (state is MenuStateInitial) {
             return buildButtons();
-          }  else {
+          } else {
             return Center(child: Text("Error try again later :("));
           }
         },
@@ -77,5 +77,4 @@ class MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
-   
 }

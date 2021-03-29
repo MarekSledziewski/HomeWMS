@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:home_wms/add/ui/add_screen.dart';
 import 'package:home_wms/delete/ui/delete_screen.dart';
 import 'package:home_wms/menu/ui/menu_screen.dart';
@@ -16,8 +17,10 @@ class PageViewController extends StatefulWidget {
 }
 
 class PageViewControllerState extends State<PageViewController> {
-  late final PageController _controller1 = PageController(initialPage: 1, keepPage: true);
-  late final PageController _controller2 = PageController(initialPage: 1, keepPage: true);
+  late final PageController _controller1 =
+      PageController(initialPage: 1, keepPage: true);
+  late final PageController _controller2 =
+      PageController(initialPage: 1, keepPage: true);
 
   @override
   void dispose() {
@@ -27,6 +30,7 @@ class PageViewControllerState extends State<PageViewController> {
   }
 
   bool scrollingAllower = true;
+
   horizontalScroll() {
     if (scrollingAllower == false) {
       return NeverScrollableScrollPhysics();
@@ -58,7 +62,7 @@ class PageViewControllerState extends State<PageViewController> {
                   });
                 },
                 children: [
-                  ListScreen(),
+                  buildHiveList(),
                   MenuScreen(),
                   OptionsScreen(),
                 ]),
@@ -81,7 +85,7 @@ class PageViewControllerState extends State<PageViewController> {
                 {
                   return animateToList();
                 }
-                  case "Options":
+              case "Options":
                 {
                   return animateToOptions();
                 }
@@ -90,12 +94,40 @@ class PageViewControllerState extends State<PageViewController> {
         },
         child: buildPageView(),
       );
-  animateToAdd() => _controller1.animateToPage(2,
-      duration: Duration(seconds: 1), curve: Curves.decelerate , );
+
+  animateToAdd() => _controller1.animateToPage(
+        2,
+        duration: Duration(seconds: 1),
+        curve: Curves.decelerate,
+      );
+
   animateToDelete() => _controller1.animateToPage(0,
       duration: Duration(seconds: 1), curve: Curves.decelerate);
+
   animateToOptions() => _controller2.animateToPage(2,
       duration: Duration(seconds: 1), curve: Curves.decelerate);
+
   animateToList() => _controller2.animateToPage(0,
       duration: Duration(seconds: 1), curve: Curves.decelerate);
-}
+
+  Widget buildHiveList() 
+  {
+    return FutureBuilder(
+    
+        future: Hive.openBox('items'),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return throw(snapshot.error.toString());
+            } else {
+              return ListScreen();
+            }
+          }
+          return Scaffold();
+        } );
+  }
+
+     
+  }
+      
+    

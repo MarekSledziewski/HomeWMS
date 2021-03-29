@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:home_wms/list/bloc/list_bloc.dart';
 
 class ListScreen extends StatefulWidget {
@@ -18,7 +19,11 @@ class ListScreenState extends State<ListScreen> {
     super.initState();
     BlocProvider.of<ListBloc>(context).add(LoadItemsEvent());
   }
-
+  @override
+  void dispose() {
+    Hive.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
