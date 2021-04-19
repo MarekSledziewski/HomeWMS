@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:home_wms/add/add/add_bloc.dart';
 
 class AddScreen extends StatefulWidget {
@@ -13,21 +16,43 @@ class AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _buildAppbarTitle(),
-        backgroundColor: Colors.redAccent,
-        centerTitle: true,
-      ),
+      appBar: _buildAppbar(),
       body: _buildBloc(),
     );
   }
-@override
-  void dispose() { 
+
+  @override
+  void dispose() {
+    Hive.box("categories").close();
+     Hive.box("producers").close();
     super.dispose();
   }
- 
+
+  late String choosenCategoryValue;
+  late List listCategories;
+  late String choosenProducerValue;
+  late List listProducers;
+  @override
+  void initState() {
+    listCategories = Hive.box('categories').values.toList();
+    if (listCategories.isEmpty) {
+      choosenCategoryValue = "";
+    } else {
+      choosenCategoryValue = listCategories.first;
+    }
+    listProducers = Hive.box('producers').values.toList();
+     if (listProducers.isEmpty) {
+      choosenProducerValue = "";
+    } else {
+      choosenProducerValue = listProducers.first;
+    }
+    super.initState();
+  }
+
   final productNameFieldController = TextEditingController();
   final quantityFieldController = TextEditingController();
+  final productBarCodeFieldController = TextEditingController();
+  final productPriceFieldController = TextEditingController();
 
   Widget _buildBloc() => BlocBuilder<AddBloc, AddState>(
         builder: (context, state) {
@@ -35,9 +60,6 @@ class AddScreenState extends State<AddScreen> {
             return _buildBody();
           } else if (state is ProdcutAdded) {
             return _buildBody();
-          } else if (state is ScannInputState) {
-            // TOOD add Scanner build here
-            return Text("Scanner Output");
           } else {
             return Center(child: Text('Error on Bloc Builder'));
           }
@@ -47,14 +69,23 @@ class AddScreenState extends State<AddScreen> {
   Widget _buildBody() => Column(
         children: [
           productNameTextField(),
-          productCategoryTextField(),
+          productCategoryField(),
+          productProducerField(),
           productBarCodeTextField(),
-          priceField(),
-          quantityField(),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: buildAddButton(),
-          )
+          productPriceField(),
+          productQuantityField(),
+          Row(
+            children: [
+              Align(
+                alignment: Alignment.bottomRight,
+                child: buildAddButton(),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: _scannerButtonAction(),
+              ),
+            ],
+          ),
         ],
       );
 
@@ -80,38 +111,49 @@ class AddScreenState extends State<AddScreen> {
           fillColor: Colors.white,
           border: InputBorder.none,
           hintText: 'Name'));
-          
-Widget productCategoryTextField() => TextField(
-      onEditingComplete: () {
-        FocusScope.of(context).nextFocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 100,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productNameFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          hintText: 'Category'));
 
-          Widget productBarCodeTextField() => TextField(
+  Widget productCategoryField() => Container(
+      child: DropdownButton(
+          isExpanded: true,
+          value: choosenCategoryValue,
+          onChanged: (value) {
+            setState(() {
+              choosenCategoryValue = value.toString();
+            });
+          },
+          items: listCategories
+              .map((categoryValue) => DropdownMenuItem(
+                  value: categoryValue,
+                  child: Text(
+                    categoryValue,
+                  )))
+              .toList()));
+
+  Widget productProducerField() => Container(
+      child: DropdownButton(
+          isExpanded: true,
+          value: choosenProducerValue,
+          onChanged: (value) {
+            setState(() {
+              choosenProducerValue = value.toString();
+            });
+          },
+          items: listProducers
+              .map((producerValue) => DropdownMenuItem(
+                  value: producerValue,
+                  child: Text(
+                    producerValue,
+                  )))
+              .toList()));
+
+  Widget productBarCodeTextField() => TextField(
       onEditingComplete: () {
         FocusScope.of(context).nextFocus();
       },
       textInputAction: TextInputAction.next,
       maxLength: 100,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productNameFieldController,
+      controller: productBarCodeFieldController,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
@@ -127,7 +169,7 @@ Widget productCategoryTextField() => TextField(
           border: InputBorder.none,
           hintText: 'Bar Code'));
 
-  Widget quantityField() => TextField(
+  Widget productQuantityField() => TextField(
       keyboardType: TextInputType.number,
       onEditingComplete: () {
         FocusScope.of(context).unfocus();
@@ -151,7 +193,7 @@ Widget productCategoryTextField() => TextField(
           border: InputBorder.none,
           hintText: 'quantity'));
 
-          Widget priceField() => TextField(
+  Widget productPriceField() => TextField(
       keyboardType: TextInputType.number,
       onEditingComplete: () {
         FocusScope.of(context).unfocus();
@@ -159,7 +201,7 @@ Widget productCategoryTextField() => TextField(
       textInputAction: TextInputAction.next,
       maxLength: 20,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: quantityFieldController,
+      controller: productPriceFieldController,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
@@ -173,24 +215,28 @@ Widget productCategoryTextField() => TextField(
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'price'));
+          hintText: 'Price'));
 
   Widget buildAddButton() => OutlinedButton(
         onPressed: () {
-          if (productNameFieldController.text.isNotEmpty &&
-              quantityFieldController.text.isNotEmpty) {
-            _addConfirmDialog();
-          } else {
+          if (productNameFieldController.text.isEmpty ||
+              productPriceFieldController.text.isEmpty ||
+              quantityFieldController.text.isEmpty) {
             _emptyFields();
+          } else {
+            _addConfirmDialog();
           }
         },
         child: Text("Add Product"),
       );
 
-  _addEvent(bool addSimilar) =>
-      BlocProvider.of<AddBloc>(context).add(AddProductEvent(
-          productNameFieldController.text,
-          int.parse(quantityFieldController.text)));
+  _addEvent() => BlocProvider.of<AddBloc>(context).add(AddProductEvent(
+      productNameFieldController.text,
+      choosenCategoryValue,
+      productBarCodeFieldController.text,
+      choosenProducerValue,
+      double.parse(productPriceFieldController.text),
+      int.parse(quantityFieldController.text)));
 
   _addConfirmDialog() => showDialog(
         context: context,
@@ -205,15 +251,21 @@ Widget productCategoryTextField() => TextField(
                   child: Text("Cancel")),
               OutlinedButton(
                   onPressed: () {
-                    _addEvent(false);
+                    if (productBarCodeFieldController.text.isEmpty) {
+                      productBarCodeFieldController.text =
+                          productNameFieldController.text;
+                    }
+                    _addEvent();
                     productNameFieldController.clear();
                     quantityFieldController.clear();
+                    productPriceFieldController.clear();
+                    productBarCodeFieldController.clear();
                     Navigator.pop(context);
                   },
                   child: Text("Add")),
               OutlinedButton(
                   onPressed: () {
-                    _addEvent(true);
+                    _addEvent();
                     Navigator.pop(context);
                   },
                   child: Text("Add Similar"))
@@ -231,10 +283,21 @@ Widget productCategoryTextField() => TextField(
                 })
           ]));
 
- Widget _buildAppbarTitle() => Row(children: [ Text("Add Product"), Spacer(), IconButton(icon: Icon(Icons.arrow_back_rounded), onPressed: 
- ()
- {
-BlocProvider.of<AddBloc>(context).add(ReturnToMenuAddEvent());
- })]);
+  _scannerButtonAction() => OutlinedButton(
+      child: Text('Scann'),
+      onPressed: () {
+        _scanBarcode();
+      });
 
+  Future<void> _scanBarcode() async {
+    final String barcode = await FlutterBarcodeScanner.scanBarcode(
+        '#FF0000', 'Return', true, ScanMode.DEFAULT);
+    productBarCodeFieldController.text = barcode;
+  }
+
+  AppBar _buildAppbar() => AppBar(
+        title: (Text("Add Product")),
+        backgroundColor: Colors.redAccent,
+        centerTitle: true,
+      );
 }

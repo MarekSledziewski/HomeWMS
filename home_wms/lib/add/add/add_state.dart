@@ -8,6 +8,8 @@ abstract class AddState extends Equatable {
 
 class InitialAddState extends AddState {}
 
-class ScannInputState extends AddState {}
-
 class ProdcutAdded extends AddState {}
+
+class ReturnToMenuAddState extends AddState {
+
+}
