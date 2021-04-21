@@ -4,8 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:home_wms/model/category/category.dart';
-import 'package:home_wms/model/producent/producer.dart';
 import 'package:home_wms/model/products/products.dart';
 import 'package:meta/meta.dart';
 

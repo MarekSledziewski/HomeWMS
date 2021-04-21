@@ -8,6 +8,8 @@ import 'package:home_wms/loading_animation.dart';
 import 'package:home_wms/menu/ui/menu_screen.dart';
 import 'package:home_wms/options/ui/options_screen.dart';
 import 'package:home_wms/prodcuts_list/ui/products_list_screen.dart';
+import 'package:home_wms/producer/ui/producer_screen.dart';
+
 
 import 'Category/ui/category_screen.dart';
 import 'menu/bloc/menu_bloc.dart';
@@ -51,7 +53,7 @@ class PageViewControllerState extends State<PageViewController> {
                     {
                       return _animateToOptions();
                     }
-                  case "History":
+                  case "Producers":
                     {
                       return _animateToHistory();
                     }
@@ -82,7 +84,8 @@ class PageViewControllerState extends State<PageViewController> {
   _animateToCategories() => Navigator.push(context,
       new MaterialPageRoute(builder: (context) => _buildHiveCategories()));
 
-  _animateToHistory() => Navigator.pop(context);
+  _animateToHistory() => Navigator.push(context,
+      new MaterialPageRoute(builder: (context) => _buildHiveProducers()));
 }
 
 Widget _buildHiveProductsList() {
@@ -139,4 +142,17 @@ Widget _buildHiveCategories() {
           return LoadingAnimation();
         });
   }
-
+Widget _buildHiveProducers() {
+  return FutureBuilder(
+      future: Hive.openBox('producers'),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return throw (snapshot.error.toString());
+          } else {
+            return ProducerScreen();
+          }
+        }
+        return LoadingAnimation();
+      });
+}

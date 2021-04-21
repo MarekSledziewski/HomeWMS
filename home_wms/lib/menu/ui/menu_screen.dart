@@ -48,7 +48,7 @@ class MenuScreenState extends State<MenuScreen> {
             MenuButtons('Add', Colors.redAccent),],),),
             Expanded( child: Row(
           children: [
-             MenuButtons('History', Colors.brown),
+             MenuButtons('Producers', Colors.brown),
             MenuButtons('Categories', Colors.purpleAccent),
           ],),),
            

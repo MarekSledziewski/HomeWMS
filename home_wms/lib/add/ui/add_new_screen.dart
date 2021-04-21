@@ -24,7 +24,7 @@ class AddScreenState extends State<AddScreen> {
   @override
   void dispose() {
     Hive.box("categories").close();
-     Hive.box("producers").close();
+    Hive.box("producers").close();
     super.dispose();
   }
 
@@ -34,17 +34,20 @@ class AddScreenState extends State<AddScreen> {
   late List listProducers;
   @override
   void initState() {
-    listCategories = Hive.box('categories').values.toList();
+    listCategories =
+        Hive.box('categories').values.toList();
+    listCategories = 
     if (listCategories.isEmpty) {
       choosenCategoryValue = "";
     } else {
       choosenCategoryValue = listCategories.first;
     }
     listProducers = Hive.box('producers').values.toList();
-     if (listProducers.isEmpty) {
+
+    if (listProducers.isEmpty) {
       choosenProducerValue = "";
     } else {
-      choosenProducerValue = listProducers.first;
+      choosenProducerValue = listProducers.first.name;
     }
     super.initState();
   }
@@ -66,7 +69,7 @@ class AddScreenState extends State<AddScreen> {
         },
       );
 
-  Widget _buildBody() => Column(
+  Widget _buildBody() => ListView(
         children: [
           productNameTextField(),
           productCategoryField(),
@@ -191,7 +194,7 @@ class AddScreenState extends State<AddScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'quantity'));
+          hintText: 'Quantity'));
 
   Widget productPriceField() => TextField(
       keyboardType: TextInputType.number,
@@ -227,7 +230,21 @@ class AddScreenState extends State<AddScreen> {
             _addConfirmDialog();
           }
         },
-        child: Text("Add Product"),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+            return Colors.redAccent;
+          }),
+          overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.red.shade900;
+            }
+            return Colors.transparent;
+          }),
+        ),
+        child: Text(
+          "Add product",
+          style: TextStyle(color: Colors.white),
+        ),
       );
 
   _addEvent() => BlocProvider.of<AddBloc>(context).add(AddProductEvent(
@@ -245,30 +262,81 @@ class AddScreenState extends State<AddScreen> {
             content: Text('Add your product to the Database'),
             actions: [
               OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Cancel")),
-              OutlinedButton(
-                  onPressed: () {
-                    if (productBarCodeFieldController.text.isEmpty) {
-                      productBarCodeFieldController.text =
-                          productNameFieldController.text;
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.blueAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.blue.shade900;
                     }
-                    _addEvent();
-                    productNameFieldController.clear();
-                    quantityFieldController.clear();
-                    productPriceFieldController.clear();
-                    productBarCodeFieldController.clear();
-                    Navigator.pop(context);
-                  },
-                  child: Text("Add")),
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
               OutlinedButton(
-                  onPressed: () {
-                    _addEvent();
-                    Navigator.pop(context);
-                  },
-                  child: Text("Add Similar"))
+                onPressed: () {
+                  if (productBarCodeFieldController.text.isEmpty) {
+                    productBarCodeFieldController.text =
+                        productNameFieldController.text;
+                  }
+                  _addEvent();
+                  productNameFieldController.clear();
+                  quantityFieldController.clear();
+                  productPriceFieldController.clear();
+                  productBarCodeFieldController.clear();
+                  Navigator.pop(context);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.redAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.red.shade900;
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  "Add",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  _addEvent();
+                  Navigator.pop(context);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.blueAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.blue.shade900;
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  "AddSimilar",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
             ]),
       );
 
@@ -277,14 +345,44 @@ class AddScreenState extends State<AddScreen> {
       builder: (BuildContext context) =>
           AlertDialog(title: Text('Fill requaierd fields'), actions: [
             OutlinedButton(
-                child: Text("Ok"),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.redAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.red.shade900;
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 })
           ]));
 
   _scannerButtonAction() => OutlinedButton(
-      child: Text('Scann'),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+          return Colors.tealAccent;
+        }),
+        overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+          if (states.contains(MaterialState.pressed)) {
+            return Colors.teal.shade900;
+          }
+          return Colors.transparent;
+        }),
+      ),
+      child: Text(
+        "Scann",
+        style: TextStyle(color: Colors.white),
+      ),
       onPressed: () {
         _scanBarcode();
       });

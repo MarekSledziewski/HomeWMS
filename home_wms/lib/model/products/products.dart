@@ -1,9 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:home_wms/model/category/category.dart';
-
 part 'products.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 2)
 class Product {
   @HiveField(0)
   String name;
