@@ -30,20 +30,19 @@ class ProducerBloc extends Bloc<ProducerEvent, ProducerState> {
           .toList();
 
       yield LoadedProducerListSearchState(listOfProducersValues);
-
     } else if (event is AddProducerEvent) {
       yield LoadingProducerListState();
-      String name = event.producerName[0].toUpperCase() + event.producerName.substring(1);
-      Hive.box('producers').add(Producer(name, event.producerAdress, event.producerDescryption));
+      String name =
+          event.producerName[0].toUpperCase() + event.producerName.substring(1);
+      Hive.box('producers')
+          .add(Producer(name, event.producerAdress, event.producerDescryption));
 
       yield LoadedProducerListState();
-
-
     } else if (event is DeleteProducerEvent) {
       yield LoadingProducerListState();
       var producersBox = Hive.box('producers').toMap();
       var index = producersBox.keys
-          .firstWhere((k) => producersBox [k] == event.producerName);
+          .firstWhere((k) => producersBox[k] == event.producerName);
       Hive.box('producers').delete(index);
       yield LoadedProducerListState();
     }
