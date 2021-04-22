@@ -19,4 +19,4 @@ class LoadedProducerListSearchState extends ProducerState
 {  
   List listOfProducers;
   LoadedProducerListSearchState(this.listOfProducers);
-  }
+  } 

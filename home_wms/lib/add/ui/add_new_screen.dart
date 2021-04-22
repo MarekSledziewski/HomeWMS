@@ -34,9 +34,7 @@ class AddScreenState extends State<AddScreen> {
   late List listProducers;
   @override
   void initState() {
-    listCategories =
-        Hive.box('categories').values.toList();
-    listCategories = 
+    listCategories = Hive.box('categories').values.toList();
     if (listCategories.isEmpty) {
       choosenCategoryValue = "";
     } else {

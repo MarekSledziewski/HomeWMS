@@ -136,7 +136,7 @@ Widget _buildHiveCategories() {
             }
           }
           return LoadingAnimation();
-        });;
+        });
             }
           }
           return LoadingAnimation();
