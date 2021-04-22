@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';
-import 'package:home_wms/Category/bloc/category_bloc.dart';
+import 'package:home_wms/category/bloc/category_bloc.dart';
 import 'package:home_wms/loading_animation.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -15,6 +15,7 @@ class CategoryScreen extends StatefulWidget {
 class CategoryScreenState extends State<CategoryScreen> {
   final searchTextFieldController = TextEditingController();
   final _addTextFieldController = TextEditingController();
+  final _editTextFieldController = TextEditingController();
 
   final categoriesBox = Hive.box('categories');
 
@@ -36,7 +37,7 @@ class CategoryScreenState extends State<CategoryScreen> {
         appBar: _buildAppbar(),
         body: Column(children: [
           _searchField(),
-          _buildBlocBuilder(),
+          Expanded(child: _buildBlocBuilder()),
           Align(
             alignment: Alignment.bottomRight,
             child: _addCategoryButton(),
@@ -55,31 +56,31 @@ class CategoryScreenState extends State<CategoryScreen> {
         if (state is LoadingCategoryListState) {
           return LoadingAnimation();
         } else if (state is LoadedCategoryListSearchState) {
-          return __buildCategoryListSearched(state.listOfCategories);
+          return _buildCategoryListSearched(state.listOfCategories);
         } else {
           return _buildCategoryList();
         }
       });
 
   Widget _buildCategoryList() {
-    return Expanded(
-        child: ListView.builder(
-            itemCount: categoriesBox.length,
-            itemBuilder: (context, index) {
-              final category = categoriesBox.getAt(index);
-              return _listTile(category);
-            }));
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: categoriesBox.length,
+        itemBuilder: (context, index) {
+          final category = categoriesBox.getAt(index);
+          return _listTile(category);
+        });
   }
 
-  Widget __buildCategoryListSearched(List listOfCategories) {
-    return Expanded(
-        child: ListView.builder(
+  Widget _buildCategoryListSearched(List listOfCategories) {
+    return ListView.builder(
+      shrinkWrap: true,
       itemBuilder: (context, index) => _listTile(listOfCategories[index]),
       itemCount: listOfCategories.length,
-    ));
+    );
   }
 
-  Widget _listTile(category) => Slidable(
+  Widget _listTile(String category) => Slidable(
           actionPane: SlidableDrawerActionPane(),
           actionExtentRatio: 0.25,
           child: Container(
@@ -95,6 +96,10 @@ class CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             child: ListTile(
+                onTap: () {
+                  _editTextFieldController.text = category;
+                  _editDialog(category);
+                },
                 minVerticalPadding: 2,
                 title: Text(
                   category,
@@ -107,7 +112,6 @@ class CategoryScreenState extends State<CategoryScreen> {
                 color: Colors.blue,
                 icon: Icons.delete,
                 onTap: () => {
-                      print(category),
                       _deleteCategory(category),
                     })
           ]);
@@ -118,7 +122,6 @@ class CategoryScreenState extends State<CategoryScreen> {
         FocusScope.of(context).unfocus();
       },
       textInputAction: TextInputAction.next,
-      maxLength: 50,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
       controller: searchTextFieldController,
       decoration: InputDecoration(
@@ -157,21 +160,19 @@ class CategoryScreenState extends State<CategoryScreen> {
 
   _addDialog() => showDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
+      builder: (BuildContext _context) => AlertDialog(
           title: Text('Add Category'),
           actions: [
             OutlinedButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.pop(_context),
               child: Text('Cancel'),
             ),
-            Spacer(),
+           
             OutlinedButton(
               onPressed: () {
                 if (_addTextFieldController.text.isNotEmpty) {
-                  BlocProvider.of<CategoryBloc>(context)
-                      .add(AddCategoryEvent(_addTextFieldController.text));
-                  Navigator.pop(context);
+                  _addEvent();
+                  Navigator.pop(_context);
                   _addTextFieldController.clear();
                 }
               },
@@ -182,6 +183,39 @@ class CategoryScreenState extends State<CategoryScreen> {
             controller: _addTextFieldController,
             decoration: InputDecoration(hintText: "Category"),
           ),
-        );
-      });
+        ));
+  
+
+  _editDialog(String _category) => showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+          title: Text('Edit Category'),
+          actions: [
+            OutlinedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel'),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                if (_editTextFieldController.text.isNotEmpty) {
+                  _editEvent(_category);
+                  Navigator.pop(context);
+                  _editTextFieldController.clear();
+                }
+              },
+              child: Text('Apply'),
+            ),
+          ],
+          content: TextField(
+            controller: _editTextFieldController,
+            decoration: InputDecoration(hintText: "Category"),
+          ),
+        ));
+    
+      _editEvent(_category) {BlocProvider.of<CategoryBloc>(context).add(EditCategoryEvent(
+                      _category, _editTextFieldController.text));}
+
+    _addEvent() {BlocProvider.of<CategoryBloc>(context)
+        .add(AddCategoryEvent(_addTextFieldController.text));
+  }
 }

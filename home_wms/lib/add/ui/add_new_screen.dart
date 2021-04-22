@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:home_wms/add/add/add_bloc.dart';
+import 'package:home_wms/model/producer/producer.dart';
 
 class AddScreen extends StatefulWidget {
   @override
@@ -30,22 +30,21 @@ class AddScreenState extends State<AddScreen> {
 
   late String choosenCategoryValue;
   late List listCategories;
-  late String choosenProducerValue;
-  late List listProducers;
+  late Producer choosenProducerValue;
+  late List<Producer> listProducers;
   @override
   void initState() {
     listCategories = Hive.box('categories').values.toList();
+
     if (listCategories.isEmpty) {
       choosenCategoryValue = "";
     } else {
       choosenCategoryValue = listCategories.first;
     }
-    listProducers = Hive.box('producers').values.toList();
 
-    if (listProducers.isEmpty) {
-      choosenProducerValue = "";
-    } else {
-      choosenProducerValue = listProducers.first.name;
+    listProducers = Hive.box('producers').values.cast<Producer>().toList();
+   if (listProducers.isNotEmpty) {
+     choosenProducerValue = listProducers.first;
     }
     super.initState();
   }
@@ -77,14 +76,11 @@ class AddScreenState extends State<AddScreen> {
           productQuantityField(),
           Row(
             children: [
-              Align(
-                alignment: Alignment.bottomRight,
-                child: buildAddButton(),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: _scannerButtonAction(),
-              ),
+              
+          _scannerButtonAction(),
+          Spacer(),
+             _buildAddButton(),
+           
             ],
           ),
         ],
@@ -136,16 +132,17 @@ class AddScreenState extends State<AddScreen> {
           value: choosenProducerValue,
           onChanged: (value) {
             setState(() {
-              choosenProducerValue = value.toString();
+              choosenProducerValue = value as Producer;
             });
           },
           items: listProducers
               .map((producerValue) => DropdownMenuItem(
                   value: producerValue,
                   child: Text(
-                    producerValue,
+                    producerValue.name,
                   )))
               .toList()));
+
 
   Widget productBarCodeTextField() => TextField(
       onEditingComplete: () {
@@ -218,7 +215,7 @@ class AddScreenState extends State<AddScreen> {
           border: InputBorder.none,
           hintText: 'Price'));
 
-  Widget buildAddButton() => OutlinedButton(
+  Widget _buildAddButton() => OutlinedButton(
         onPressed: () {
           if (productNameFieldController.text.isEmpty ||
               productPriceFieldController.text.isEmpty ||
@@ -249,7 +246,7 @@ class AddScreenState extends State<AddScreen> {
       productNameFieldController.text,
       choosenCategoryValue,
       productBarCodeFieldController.text,
-      choosenProducerValue,
+      choosenProducerValue.name,
       double.parse(productPriceFieldController.text),
       int.parse(quantityFieldController.text)));
 
@@ -368,11 +365,11 @@ class AddScreenState extends State<AddScreen> {
   _scannerButtonAction() => OutlinedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          return Colors.tealAccent;
+          return Colors.amberAccent;
         }),
         overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
           if (states.contains(MaterialState.pressed)) {
-            return Colors.teal.shade900;
+            return Colors.amber.shade900;
           }
           return Colors.transparent;
         }),

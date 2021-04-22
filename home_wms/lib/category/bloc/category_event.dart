@@ -15,12 +15,17 @@ class GetSearchEvent extends CategoryEvent {
 }
 
 class AddCategoryEvent extends CategoryEvent {
-  final categoryName;
+  final String categoryName;
   AddCategoryEvent(this.categoryName);
 }
 
 class DeleteCategoryEvent extends CategoryEvent {
-  final categoryName;
+  final String categoryName;
   DeleteCategoryEvent(this.categoryName);
 }
-class EditCategoryEvent extends CategoryEvent {}
+
+class EditCategoryEvent extends CategoryEvent {
+  final String editedCategory;
+  final String newCategory;
+  EditCategoryEvent(this.editedCategory, this.newCategory);
+}
