@@ -13,16 +13,23 @@ class GetSearchEvent extends ProducerEvent {
 }
 
 class AddProducerEvent extends ProducerEvent {
-  final producerName;
-  final producerAdress;
-  final producerDescryption;
+  final String producerName;
+  final String producerAdress;
+  final String producerDescryption;
   AddProducerEvent(
       this.producerName, this.producerAdress, this.producerDescryption);
 }
 
 class DeleteProducerEvent extends ProducerEvent {
-  final producerName;
+  final String producerName;
   DeleteProducerEvent(this.producerName);
 }
 
-class EditproducerEvent extends ProducerEvent {}
+class EditproducerEvent extends ProducerEvent {
+  final Producer oldproducer;
+  final  String producerName;
+  final String producerAdress;
+  final String producerDescryption;
+  EditproducerEvent(this.oldproducer,
+      this.producerName, this.producerAdress, this.producerDescryption);
+}

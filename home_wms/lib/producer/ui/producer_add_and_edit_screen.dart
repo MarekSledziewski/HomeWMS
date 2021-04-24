@@ -1,13 +1,19 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:home_wms/model/producer/producer.dart';
 import 'package:home_wms/producer/bloc/producer_bloc.dart';
 
+// ignore: must_be_immutable
 class AddProducerScreen extends StatelessWidget {
-  AddProducerScreen.values(producerName, produceradress, producerDyscryption) {
-    producerNameFieldContrroler.text = producerName;
-    producerAdressFieldContrroler.text = produceradress;
-    producerDescryptionFieldContrroler.text = producerDyscryption;
+  bool edit = false;
+  
+  AddProducerScreen.values(Producer producer) {
+     oldProducer = producer;
+    producerNameFieldContrroler.text = producer.name;
+    producerAdressFieldContrroler.text = producer.adress;
+    producerDescryptionFieldContrroler.text = producer.descryption;
+    edit = true;
   }
   AddProducerScreen();
 
@@ -21,16 +27,17 @@ class AddProducerScreen extends StatelessWidget {
             producerAdressTextField(context),
             producerDescryptionField(context),
             Row(
-              children: [
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children:[
                 _returnButton(context),
-                Spacer(),
+              
                 _okButton(context),
               ],
             )
           ],
         ));
   }
-
+  late final Producer oldProducer; 
   final producerNameFieldContrroler = TextEditingController();
   final producerAdressFieldContrroler = TextEditingController();
   final producerDescryptionFieldContrroler = TextEditingController();
@@ -110,7 +117,7 @@ class AddProducerScreen extends StatelessWidget {
   Widget _okButton(context) => OutlinedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          return Colors.redAccent;
+            return Colors.redAccent;
           }),
           overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -119,24 +126,35 @@ class AddProducerScreen extends StatelessWidget {
             return Colors.transparent;
           }),
         ),
-        child: Text("Ok", style: TextStyle(color: Colors.white),),
+        child: Text(
+          "Ok",
+          style: TextStyle(color: Colors.white),
+        ),
         onPressed: () {
-          if (producerNameFieldContrroler.text.isNotEmpty) {
+          if (producerNameFieldContrroler.text.isNotEmpty && edit==false) {
             Navigator.pop(context);
             BlocProvider.of<ProducerBloc>(context).add(AddProducerEvent(
                 producerNameFieldContrroler.text,
                 producerAdressFieldContrroler.text,
                 producerNameFieldContrroler.text));
+          } else if (producerNameFieldContrroler.text.isNotEmpty && edit==true ) {
+              Navigator.pop(context);
+                 BlocProvider.of<ProducerBloc>(context).add(EditproducerEvent(
+                oldProducer,
+                producerNameFieldContrroler.text,
+                producerAdressFieldContrroler.text,
+                producerDescryptionFieldContrroler.text));
           } else {
             _emptyFields(context);
           }
         },
-        
       );
+
+
   Widget _returnButton(context) => OutlinedButton(
-     style: ButtonStyle(
+        style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          return Colors.blueAccent;
+            return Colors.blueAccent;
           }),
           overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -145,31 +163,42 @@ class AddProducerScreen extends StatelessWidget {
             return Colors.transparent;
           }),
         ),
-        child: Text("Return", style: TextStyle(color: Colors.white),),
+        child: Text(
+          "Return",
+          style: TextStyle(color: Colors.white),
+        ),
         onPressed: () {
           Navigator.pop(context);
         },
-       
       );
 
   _emptyFields(context) => showDialog(
+
       context: context,
       builder: (BuildContext context) =>
           AlertDialog(title: Text('Fill requaierd fields'), actions: [
-            OutlinedButton(style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          return Colors.redAccent;
-          }),
-          overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Colors.red.shade900;
-            }
-            return Colors.transparent;
-          }),
-        ),
-        child: Text("Ok", style: TextStyle(color: Colors.white),),
+            OutlinedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.redAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.red.shade900;
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 })
           ]));
+
+
 }

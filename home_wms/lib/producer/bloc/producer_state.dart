@@ -20,3 +20,10 @@ class LoadedProducerListSearchState extends ProducerState
   List listOfProducers;
   LoadedProducerListSearchState(this.listOfProducers);
   } 
+  
+  // ignore: must_be_immutable
+  class ProducerExsistsState extends ProducerState{
+Producer producer;
+    ProducerExsistsState(this.producer);
+  }
+  

@@ -46,11 +46,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       await Hive.openBox('products');
 
       Map products = Hive.box('products').toMap();
-
-      var productsKeys = products.keys
-          .where((key) => products[key].category == event.editedCategory);
-
-      productsKeys.forEach((element) {
+         products.keys
+          .where((key) => products[key].category == event.editedCategory)
+          .forEach((element) {
         Product temp = Hive.box('products').get(element);
 
         temp.category = event.newCategory;
