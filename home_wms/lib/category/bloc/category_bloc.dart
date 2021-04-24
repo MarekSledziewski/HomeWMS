@@ -33,44 +33,59 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     } else if (event is AddCategoryEvent) {
       yield LoadingCategoryListState();
       var categorysBox = Hive.box('categories').toMap();
+      if (categorysBox.values.any((element) =>
+          element.toLowerCase().replaceAll(" ", "") ==
+          event.categoryName.toLowerCase().replaceAll(" ", ""))) {
+                    yield CategoryExsistsState();
 
-      if (!categorysBox.values.any((element) => element.toLowerCase().replaceAll(" ", "") == event.categoryName.toLowerCase().replaceAll(" ", ""))) {
-        String name = event.categoryName[0].toUpperCase() +
-            event.categoryName.substring(1);
-        Hive.box('categories').add(name);
+      } else {
+        _addCategory(event);
+        yield LoadedCategoryListState();
       }
-
-      yield LoadedCategoryListState();
     } else if (event is EditCategoryEvent) {
       yield LoadingCategoryListState();
-      await Hive.openBox('products');
-
-      Map products = Hive.box('products').toMap();
-         products.keys
-          .where((key) => products[key].category == event.editedCategory)
-          .forEach((element) {
-        Product temp = Hive.box('products').get(element);
-
-        temp.category = event.newCategory;
-
-        Hive.box('products').put(element, temp);
-      });
-
-      var categorysBox = Hive.box('categories').toMap();
-
-      int indexcategory = categorysBox.keys
-          .firstWhere((key) => categorysBox[key] == event.editedCategory);
-
-      Hive.box('categories').put(indexcategory, event.newCategory);
-            Hive.box("products").close();
+      _editCategory(event);
       yield LoadedCategoryListState();
     } else if (event is DeleteCategoryEvent) {
       yield LoadingCategoryListState();
-      var categorysBox = Hive.box('categories').toMap();
-      var index = categorysBox.keys
-          .firstWhere((key) => categorysBox[key] == event.categoryName);
-      Hive.box('categories').delete(index);
+      _deleteCateogry(event);
       yield LoadedCategoryListState();
     }
+  }
+
+  _editCategory(event) async {
+    await Hive.openBox('products');
+
+    Map products = Hive.box('products').toMap();
+    products.keys
+        .where((key) => products[key].category == event.editedCategory)
+        .forEach((element) {
+      Product temp = Hive.box('products').get(element);
+
+      temp.category = event.newCategory;
+
+      Hive.box('products').put(element, temp);
+    });
+
+    var categorysBox = Hive.box('categories').toMap();
+
+    int indexcategory = categorysBox.keys
+        .firstWhere((key) => categorysBox[key] == event.editedCategory);
+
+    Hive.box('categories').put(indexcategory, event.newCategory);
+    Hive.box("products").close();
+  }
+
+  _deleteCateogry(event) {
+    var categorysBox = Hive.box('categories').toMap();
+    var index = categorysBox.keys
+        .firstWhere((key) => categorysBox[key] == event.categoryName);
+    Hive.box('categories').delete(index);
+  }
+
+  _addCategory(event) {
+    String name =
+        event.categoryName[0].toUpperCase() + event.categoryName.substring(1);
+    Hive.box('categories').add(name);
   }
 }

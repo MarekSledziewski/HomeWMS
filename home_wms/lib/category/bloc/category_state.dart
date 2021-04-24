@@ -20,3 +20,4 @@ class LoadedCategoryListSearchState extends CategoryState
   List listOfCategories;
   LoadedCategoryListSearchState(this.listOfCategories);
   }
+  class CategoryExsistsState extends CategoryState{}

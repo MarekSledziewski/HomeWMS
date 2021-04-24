@@ -57,6 +57,8 @@ class CategoryScreenState extends State<CategoryScreen> {
           return LoadingAnimation();
         } else if (state is LoadedCategoryListSearchState) {
           return _buildCategoryListSearched(state.listOfCategories);
+        } else if (state is CategoryExsistsState) {
+          return _buildAlreadyExsist();
         } else {
           return _buildCategoryList();
         }
@@ -161,61 +163,91 @@ class CategoryScreenState extends State<CategoryScreen> {
   _addDialog() => showDialog(
       context: context,
       builder: (BuildContext _context) => AlertDialog(
-          title: Text('Add Category'),
-          actions: [
-            OutlinedButton(
-              onPressed: () => Navigator.pop(_context),
-              child: Text('Cancel'),
+            title: Text('Add Category'),
+            actions: [
+              OutlinedButton(
+                onPressed: () => Navigator.pop(_context),
+                child: Text('Cancel'),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  if (_addTextFieldController.text.isNotEmpty) {
+                    _addEvent();
+                    Navigator.pop(_context);
+                    _addTextFieldController.clear();
+                  }
+                },
+                child: Text('Add'),
+              ),
+            ],
+            content: TextField(
+              controller: _addTextFieldController,
+              decoration: InputDecoration(hintText: "Category"),
             ),
-           
-            OutlinedButton(
-              onPressed: () {
-                if (_addTextFieldController.text.isNotEmpty) {
-                  _addEvent();
-                  Navigator.pop(_context);
-                  _addTextFieldController.clear();
-                }
-              },
-              child: Text('Add'),
-            ),
-          ],
-          content: TextField(
-            controller: _addTextFieldController,
-            decoration: InputDecoration(hintText: "Category"),
-          ),
-        ));
-  
+          ));
 
   _editDialog(String _category) => showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-          title: Text('Edit Category'),
-          actions: [
-            OutlinedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+            title: Text('Edit Category'),
+            actions: [
+              OutlinedButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Cancel'),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  if (_editTextFieldController.text.isNotEmpty) {
+                    _editEvent(_category);
+                    Navigator.pop(context);
+                    _editTextFieldController.clear();
+                  }
+                },
+                child: Text('Apply'),
+              ),
+            ],
+            content: TextField(
+              controller: _editTextFieldController,
+              decoration: InputDecoration(hintText: "Category"),
             ),
-            OutlinedButton(
-              onPressed: () {
-                if (_editTextFieldController.text.isNotEmpty) {
-                  _editEvent(_category);
-                  Navigator.pop(context);
-                  _editTextFieldController.clear();
-                }
-              },
-              child: Text('Apply'),
-            ),
-          ],
-          content: TextField(
-            controller: _editTextFieldController,
-            decoration: InputDecoration(hintText: "Category"),
-          ),
-        ));
-    
-      _editEvent(_category) {BlocProvider.of<CategoryBloc>(context).add(EditCategoryEvent(
-                      _category, _editTextFieldController.text));}
+          ));
 
-    _addEvent() {BlocProvider.of<CategoryBloc>(context)
+  _editEvent(_category) {
+    BlocProvider.of<CategoryBloc>(context)
+        .add(EditCategoryEvent(_category, _editTextFieldController.text));
+  }
+
+  _addEvent() {
+    BlocProvider.of<CategoryBloc>(context)
         .add(AddCategoryEvent(_addTextFieldController.text));
   }
+
+  Widget _buildAlreadyExsist() => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Category already exsists'),
+            OutlinedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    return Colors.redAccent;
+                  }),
+                  overlayColor:
+                      MaterialStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Colors.red.shade900;
+                    }
+                    return Colors.transparent;
+                  }),
+                ),
+                child: Text(
+                  'Ok',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  BlocProvider.of<CategoryBloc>(context)
+                      .add(LoadCategoriesEvent());
+                })
+          ]);
 }
