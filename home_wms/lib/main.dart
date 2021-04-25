@@ -4,11 +4,10 @@ import 'package:hive/hive.dart';
 import 'package:home_wms/add/add/add_bloc.dart';
 import 'package:home_wms/category/bloc/category_bloc.dart';
 import 'package:home_wms/delete/bloc/delete_bloc.dart';
+import 'package:home_wms/menu/ui/menu_screen.dart';
 import 'package:home_wms/model/producer/producer.dart';
 import 'package:home_wms/prodcuts_list/bloc/products_list_bloc.dart';
-import 'package:home_wms/page_controller.dart';
 import 'package:home_wms/producer/bloc/producer_bloc.dart';
-import 'menu/bloc/menu_bloc.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'model/products/products.dart';
@@ -30,9 +29,6 @@ class MyApp extends StatelessWidget {
   }
 
   Widget buildProviders() => MultiBlocProvider(providers: [
-        BlocProvider<MenuBloc>(
-          create: (BuildContext context) => MenuBloc(),
-        ),
         BlocProvider<ProductsListBloc>(
           create: (BuildContext context) => ProductsListBloc(),
         ),
@@ -48,5 +44,5 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProducerBloc>(
           create: (BuildContext context) => ProducerBloc(),
         ),
-      ], child: MaterialApp(title: "HomeWMS", home: PageViewController()));
+      ], child: MaterialApp(title: "HomeWMS", home: MenuScreen()));
 }

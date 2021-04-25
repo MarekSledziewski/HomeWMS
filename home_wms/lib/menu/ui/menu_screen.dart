@@ -1,58 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home_wms/menu/bloc/menu_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:home_wms/menu/menu_navigation_controller.dart';
 
-import 'menu_button.dart';
-
-class MenuScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => MenuScreenState();
-}
-
-class MenuScreenState extends State<MenuScreen> {
-  @override
+class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Scaffold(body: buildBlocBuilder());
+    return Scaffold(
+      body: buildButtons(context),
+    );
   }
 
-  
+  final MenuNavigationController _navigationController =
+      new MenuNavigationController();
 
- 
-
-  Widget buildBlocBuilder() => BlocBuilder<MenuBloc, MenuState>(
-        builder: (context, state) {
-          if (state is MenuStateInitial) {
-            return buildButtons();
-          } else {
-            return Center(child: Text("Error try again later :("));
-          }
-        },
+  Widget buildButtons(context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildButton('Products', Colors.greenAccent, context),
+          _buildButton('Options', Colors.yellowAccent, context),
+          _buildButton('Delete', Colors.blueAccent, context),
+          _buildButton('Add', Colors.redAccent, context),
+          _buildButton('Producers', Colors.brown, context),
+          _buildButton('Categories', Colors.purpleAccent, context),
+        ],
       );
 
-  Widget buildButtons() => 
-      Column(
- 
-      mainAxisAlignment: MainAxisAlignment.center,
-
-      children: [
-        Expanded( child: Row(
-          children: [
-         MenuButtons('Products', Colors.greenAccent),
-            MenuButtons('Options', Colors.yellowAccent),
-          ],
-        )),
-         Expanded( child: Row(
-          children: [
-             MenuButtons('Delete', Colors.blueAccent),
-            MenuButtons('Add', Colors.redAccent),],),),
-            Expanded( child: Row(
-          children: [
-             MenuButtons('Producers', Colors.brown),
-            MenuButtons('Categories', Colors.purpleAccent),
-          ],),),
-           
-      ],
-    );
-  
+  Widget _buildButton(_buttonName, _buttonColor, context) => Container(
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 3,
+              offset: Offset(0, 4)),
+        ],
+      ),
+      child: Material(
+          color: _buttonColor,
+          child: InkWell(
+              radius: 100,
+              splashColor: _buttonColor.withAlpha(90),
+              highlightColor: _buttonColor.withAlpha(90),
+              onTap: () {
+                _navigationController.menuNavigation(_buttonName, context);
+              },
+              child: Center(
+                  child: Text(_buttonName,
+                      style: GoogleFonts.lato(
+                          fontSize:
+                              MediaQuery.of(context).size.width * 0.07))))));
 }
