@@ -43,7 +43,7 @@ class MenuScreen extends StatelessWidget {
               splashColor: _buttonColor.withAlpha(90),
               highlightColor: _buttonColor.withAlpha(90),
               onTap: () {
-                _navigationController.menuNavigation(_buttonName, context);
+                _navigationController.navigate(_buttonName, context);
               },
               child: Center(
                   child: Text(_buttonName,
