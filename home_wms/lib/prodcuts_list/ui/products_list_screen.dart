@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive/hive.dart';
 import 'package:home_wms/model/products/products.dart';
 import 'package:home_wms/loading_animation.dart';
 
 import 'package:home_wms/prodcuts_list/bloc/products_list_bloc.dart';
+import 'package:home_wms/prodcuts_list/ui/products_edit_screen.dart';
 
 class ProductsListScreen extends StatefulWidget {
   @override
@@ -35,9 +37,9 @@ class ProductsListScreenState extends State<ProductsListScreen> {
   }
 
   AppBar _buildAppbar() => AppBar(
-        title: _buildAppbarTitle(),
-        shadowColor: Colors.green,
-        foregroundColor: Colors.greenAccent,
+        title: (Text("Products List")),
+        backgroundColor: Colors.greenAccent,
+        centerTitle: true,
       );
 
   Widget _buildlistScreen() => Column(children: [
@@ -75,59 +77,80 @@ class ProductsListScreenState extends State<ProductsListScreen> {
     ));
   }
 
-  Widget _listTile(product) => ListTile(
-      minVerticalPadding: 2,
-      title: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: Offset(0, 4)),
-            ],
-          ),
-          child: Column(children: [
-            Text(
-              product.name,
-              textAlign: TextAlign.center,
-            ),
-            Row(
-              children: [
-                Column(children: [
-                  Text(
-                    'Name: ' + product.category,
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    'Producent: ' + product.producer,
-                    textAlign: TextAlign.left,
-                  )]),
-                  Spacer(),
-                  Column(children: [
-                  Text(
-                    'Quantity:',
-                     
-                  ),
-                  Text(
-                    'Price:',
-                   
-                  )
-                ])
-              ,Column(children: [
-                  Text(
-                    product.quantity.toString(),
-                    textAlign: TextAlign.right,
-                  ),
-                  Text(
-                    product.price.toString(),
-                    textAlign: TextAlign.right,
-                  )
-                ])
-            
-          ])])));
+  Widget _listTile(product) => Slidable(
+          actions: <Widget>[
+            IconSlideAction(
+                caption: 'Delete',
+                color: Colors.blue,
+                icon: Icons.delete,
+                onTap: () => {})
+          ],
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1)),
+                ],
+              ),
+              child: ListTile(
+                  minVerticalPadding: 2,
+                  onTap: () => _buildEditScreen(product),
+                  title: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 7,
+                              offset: Offset(0, 4)),
+                        ],
+                      ),
+                      child: Column(children: [
+                        Text(
+                          product.name,
+                          textAlign: TextAlign.center,
+                        ),
+                        Row(children: [
+                          Column(children: [
+                            Text(
+                              'Category: ' + product.category,
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              'Producent: ' + product.producer,
+                              textAlign: TextAlign.left,
+                            )
+                          ]),
+                          Spacer(),
+                          Column(children: [
+                            Text(
+                              'Quantity:',
+                            ),
+                            Text(
+                              'Price:',
+                            )
+                          ]),
+                          Column(children: [
+                            Text(
+                              product.quantity.toString(),
+                              textAlign: TextAlign.right,
+                            ),
+                            Text(
+                              product.price.toString(),
+                              textAlign: TextAlign.right,
+                            )
+                          ])
+                        ])
+                      ])))));
 
   Widget _searchField() => TextField(
       onEditingComplete: () {
@@ -157,7 +180,16 @@ class ProductsListScreenState extends State<ProductsListScreen> {
   _getSearch() => BlocProvider.of<ProductsListBloc>(context)
       .add(GetSearchEvent(searchTextFieldController.text));
 
-  Widget _buildAppbarTitle() => Row(children: [
-        Text("List"),
-      ]);
+  _navigateToEditScreen(product) {
+    Navigator.push(
+        context,
+        new MaterialPageRoute(
+            builder: (context) => ProductEditScreen(product)));
+  }
+
+  _buildEditScreen(product) async {
+    await Hive.openBox('categories');
+    await Hive.openBox('producers');
+    _navigateToEditScreen(product);
+  }
 }

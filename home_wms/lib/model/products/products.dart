@@ -17,5 +17,5 @@ class Product {
   double price;
 
   Product(this.name, this.quantity, this.barcode, this.category, this.producer,
-      this.price);
+      this.price,);
 }

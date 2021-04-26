@@ -4,20 +4,22 @@ part of 'add_bloc.dart';
 abstract class AddEvent extends Equatable {}
 
 class AddProductEvent extends AddEvent {
-  final String productName;
-  final String productCategory;
-  final String productBarCode;
-  final String productProducer;
-  final double prodcutPrice;
-  final int productQuantity;
-  AddProductEvent(this.productName, this.productCategory, this.productBarCode,
-      this.productProducer, this.prodcutPrice, this.productQuantity);
+  final Product product;
+  AddProductEvent(this.product);
 
   @override
-  List<Object?> get props => [productName, productQuantity];
+  List<Object?> get props => [product];
 }
 
-class ReturnToMenuAddEvent extends AddEvent {
+class EditEvent extends AddEvent {
   @override
   List<Object?> get props => [];
+}
+
+class AddQuanitiEvent extends AddEvent {
+   final int quantity;
+     final String name;
+  AddQuanitiEvent(this.quantity,this.name);
+  @override
+  List<Object?> get props => [quantity, name];
 }

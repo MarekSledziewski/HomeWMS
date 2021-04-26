@@ -91,8 +91,7 @@ Widget _buildHiveCategories() {
         return LoadingAnimation();
       });
 }
-  Widget _addScreen() {
-    return FutureBuilder(
+  Widget _addScreen() => FutureBuilder(
         future: Hive.openBox('categories'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -115,7 +114,7 @@ Widget _buildHiveCategories() {
           }
           return LoadingAnimation();
         });
-  }
+  
 Widget _buildHiveProducers() {
   return FutureBuilder(
       future: Hive.openBox('producers'),

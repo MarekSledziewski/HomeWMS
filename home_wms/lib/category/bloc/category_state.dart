@@ -14,10 +14,9 @@ class LoadingCategoryListState extends CategoryState {}
 class LoadedCategoryListState extends CategoryState {}
 
 
-// ignore: must_be_immutable
 class LoadedCategoryListSearchState extends CategoryState 
 {  
-  List listOfCategories;
+  final List listOfCategories;
   LoadedCategoryListSearchState(this.listOfCategories);
   }
   class CategoryExsistsState extends CategoryState{}

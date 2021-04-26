@@ -17,44 +17,45 @@ class AddBloc extends Bloc<AddEvent, AddState> {
   @override
   Stream<AddState> mapEventToState(AddEvent event) async* {
     if (event is AddProductEvent) {
+      yield ProductAddingState();
       await Hive.openBox('products');
-      await Hive.openBox('producer');
-      await Hive.openBox('categories');
 
-      late Product tempInstanceOfProduct;
-
-      var productBox = Hive.box('products');
-
+      Box productBox = Hive.box('products');
+      Product product = event.product;
       var listOfProductsValues = productBox.values.where((element) =>
           element.name.replaceAll(" ", "").toLowerCase() ==
-          event.productName.replaceAll(" ", "").toLowerCase());
+          event.product.name.replaceAll(" ", "").toLowerCase());
 
-      if (listOfProductsValues.isNotEmpty) {
-        listOfProductsValues.forEach((element) => {
-              tempInstanceOfProduct = element,
-              tempInstanceOfProduct.quantity += event.productQuantity
-            });
+      if (listOfProductsValues.isEmpty) {
+        {
+          product.name = event.product.name[0].toUpperCase() +
+              event.product.name.substring(1);
+
+          productBox.add(product);
+        }
+        Hive.box('products').close();
+
+        yield ProdcutAddedState();
       } else {
-        String name = event.productName[0].toUpperCase() + event.productName.substring(1);
-       
-
-       
-        productBox.add(Product(
-            name,
-            event.productQuantity,
-            event.productBarCode,
-            event.productCategory,
-            event.productProducer,
-            event.prodcutPrice)); 
+        yield ProductExsistsState(product);
       }
-      Hive.box('products').close();
-      Hive.box('producer').close();
-      Hive.box('categories').close();
+    } else if (event is EditEvent) {
+      yield ProdcutAddedSimilarState();
+    } else if (event is AddQuanitiEvent) {
+      _addQuantiti(event);
+      yield ProdcutAddedState();
     }
+  }
 
-    if (event is ReturnToMenuAddEvent) {
-      yield ReturnToMenuAddState();
-      yield InitialAddState();
-    }
+  _addQuantiti(event) {
+    Map productBox = Hive.box('products').toMap();
+
+    var index = productBox.keys.firstWhere((key) =>
+        productBox[key].name.replaceAll(" ", "").toLowerCase() ==
+        event.name.replaceAll(" ", "").toLowerCase());
+    Product product;
+    product = productBox[index];
+    product.quantity = event.quantity + product.quantity;
+    Hive.box("products").put(index, product);
   }
 }

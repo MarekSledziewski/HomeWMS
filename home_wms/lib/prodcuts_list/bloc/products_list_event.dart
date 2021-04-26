@@ -16,7 +16,10 @@ class LoadProductsEvent extends ProdcutsListEvent {
   List<Object> get props => [];
 }
 
-class ReturnToMenuEvent extends ProdcutsListEvent {
+class EditProductEvent extends ProdcutsListEvent {
+  final Product oldproduct;
+  final Product product;
+  EditProductEvent(this.oldproduct, this.product);
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }

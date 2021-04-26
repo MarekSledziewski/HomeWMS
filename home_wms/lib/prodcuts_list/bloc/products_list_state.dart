@@ -12,9 +12,8 @@ class LoadingProdcutsListState extends ProductsListState {}
 
 class LoadedProdcutsListState extends ProductsListState {}
 
-// ignore: must_be_immutable
 class LoadedProductsListSearchState extends ProductsListState {
-  List listOfObjects;
+ final List listOfObjects;
   LoadedProductsListSearchState(this.listOfObjects);
 }
 

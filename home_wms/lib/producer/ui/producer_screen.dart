@@ -83,6 +83,15 @@ class ProducerScreenState extends State<ProducerScreen> {
   }
 
   Widget _listTile(producer) => Slidable(
+    actions: <Widget>[
+            IconSlideAction(
+                caption: 'Delete',
+                color: Colors.blue,
+                icon: Icons.delete,
+                onTap: () => {
+                      _deleteProducer(producer),
+                    })
+          ],
           actionPane: SlidableDrawerActionPane(),
           actionExtentRatio: 0.25,
           child: Container(
@@ -111,15 +120,7 @@ class ProducerScreenState extends State<ProducerScreen> {
                   textAlign: TextAlign.center,
                 )),
           ),
-          actions: <Widget>[
-            IconSlideAction(
-                caption: 'Delete',
-                color: Colors.blue,
-                icon: Icons.delete,
-                onTap: () => {
-                      _deleteProducer(producer),
-                    })
-          ]);
+          );
 
   Widget _searchField() => TextField(
       onEditingComplete: () {
@@ -226,4 +227,5 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
           )
         ],
       );
+      
 }
