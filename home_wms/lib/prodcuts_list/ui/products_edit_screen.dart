@@ -120,7 +120,7 @@ class ProductEditScreenState extends State<ProductEditScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Name'));
+          labelText: 'Name'));
 
   Widget productCategoryField() => Container(
       child: DropdownButton(
@@ -177,7 +177,7 @@ class ProductEditScreenState extends State<ProductEditScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Bar Code'));
+          labelText: 'Bar Code'));
 
   Widget productQuantityField() => TextField(
       inputFormatters: <TextInputFormatter>[
@@ -204,7 +204,7 @@ class ProductEditScreenState extends State<ProductEditScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Quantity'));
+          labelText: 'Quantity'));
 
   Widget productPriceField() => TextField(
       keyboardType: TextInputType.number,
@@ -231,7 +231,7 @@ class ProductEditScreenState extends State<ProductEditScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Price'));
+          labelText: 'Price'));
 
   Widget _buildAddButton() => OutlinedButton(
         onPressed: () {

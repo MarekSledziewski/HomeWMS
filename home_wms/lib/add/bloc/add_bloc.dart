@@ -39,6 +39,9 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       } else {
         yield ProductExsistsState(product);
       }
+    } else if (event is FindByScanner) {
+      yield ProductAddingState();
+     yield ProdcutFindedState( _findProductByScanner(event));
     } else if (event is EditEvent) {
       yield ProdcutAddedSimilarState();
     } else if (event is AddQuanitiEvent) {
@@ -58,4 +61,12 @@ class AddBloc extends Bloc<AddEvent, AddState> {
     product.quantity = event.quantity + product.quantity;
     Hive.box("products").put(index, product);
   }
+  _findProductByScanner(event) 
+  {
+    Map productBox = Hive.box('products').toMap();
+
+    var index = productBox.keys.firstWhere((key) =>
+        productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
+        event.barcode.replaceAll(" ", "").toLowerCase());
+    return  Hive.box("products").get(index);}
 }

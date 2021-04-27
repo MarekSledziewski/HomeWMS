@@ -19,4 +19,7 @@ class ProductExsistsState extends AddState {
   final Product product;
   ProductExsistsState(this.product);
 }
-
+class ProdcutFindedState extends AddState {
+  final Product product;
+  ProdcutFindedState(this.product);
+}

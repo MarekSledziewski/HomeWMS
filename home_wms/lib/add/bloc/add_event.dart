@@ -17,9 +17,16 @@ class EditEvent extends AddEvent {
 }
 
 class AddQuanitiEvent extends AddEvent {
-   final int quantity;
-     final String name;
-  AddQuanitiEvent(this.quantity,this.name);
+  final int quantity;
+  final String name;
+  AddQuanitiEvent(this.quantity, this.name);
   @override
   List<Object?> get props => [quantity, name];
+}
+
+class FindByScanner extends AddEvent {
+  final String barcode;
+  FindByScanner(this.barcode);
+  @override
+  List<Object?> get props => [barcode];
 }

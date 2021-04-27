@@ -140,7 +140,7 @@ class CategoryScreenState extends State<CategoryScreen> {
           fillColor: Colors.white,
           border: InputBorder.none,
           prefixIcon: Icon(Icons.search),
-          hintText: 'Search'));
+          labelText: 'Search'));
 
   _getSearch() => BlocProvider.of<CategoryBloc>(context)
       .add(GetSearchEvent(searchTextFieldController.text));
@@ -182,7 +182,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             ],
             content: TextField(
               controller: _addTextFieldController,
-              decoration: InputDecoration(hintText: "Category"),
+              decoration: InputDecoration(labelText: "Category"),
             ),
           ));
 
@@ -208,7 +208,7 @@ class CategoryScreenState extends State<CategoryScreen> {
             ],
             content: TextField(
               controller: _editTextFieldController,
-              decoration: InputDecoration(hintText: "Category"),
+              decoration: InputDecoration(labelText: "Category"),
             ),
           ));
 

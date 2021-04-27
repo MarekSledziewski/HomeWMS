@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:home_wms/add/add/add_bloc.dart';
+import 'package:home_wms/add/bloc/add_bloc.dart';
 import 'package:home_wms/loading_animation.dart';
 import 'package:home_wms/model/producer/producer.dart';
 import 'package:home_wms/model/products/products.dart';
@@ -36,7 +36,6 @@ class AddScreenState extends State<AddScreen> {
   late List<Producer> listProducers;
   @override
   void initState() {
-    setState(() => InitialAddState);
     listCategories = Hive.box('categories').values.toList();
 
     listCategories.insert(0, 'Uncategorized');
@@ -117,7 +116,7 @@ class AddScreenState extends State<AddScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Name'));
+          labelText: 'Name'));
 
   Widget productCategoryField() => Container(
       child: DropdownButton(
@@ -174,7 +173,7 @@ class AddScreenState extends State<AddScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Bar Code'));
+          labelText: 'Bar Code'));
 
   Widget productQuantityField() => TextField(
       keyboardType: TextInputType.number,
@@ -201,7 +200,7 @@ class AddScreenState extends State<AddScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Quantity'));
+          labelText: 'Quantity'));
 
   Widget productPriceField() => TextField(
       keyboardType: TextInputType.number,
@@ -228,7 +227,7 @@ class AddScreenState extends State<AddScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Price'));
+          labelText: 'Price'));
 
   Widget _buildAddButton() => OutlinedButton(
         onPressed: () {
@@ -516,7 +515,7 @@ class AddScreenState extends State<AddScreen> {
                         .firstWhere(
                             (element) => element.name == product.producer);
                   }
-                  ;
+                  
                   choosenCategoryValue = product.category;
                   BlocProvider.of<AddBloc>(context).add(EditEvent());
                 }),
@@ -550,7 +549,7 @@ class AddScreenState extends State<AddScreen> {
   }
 
   AppBar _buildAppbar() => AppBar(
-        title: (Text("Add Product")),
+        title: (Text("Add New Product")),
         backgroundColor: Colors.redAccent,
         centerTitle: true,
       );

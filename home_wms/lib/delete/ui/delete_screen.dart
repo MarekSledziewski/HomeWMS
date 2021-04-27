@@ -75,7 +75,7 @@ class DeleteScreenState extends State<DeleteScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Name'));
+          labelText: 'Name'));
 
   Widget quantityField() => TextField(
       keyboardType: TextInputType.number,
@@ -99,7 +99,7 @@ class DeleteScreenState extends State<DeleteScreen> {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'quantity'));
+          labelText: 'quantity'));
 
   Widget buildDeleteButton() => OutlinedButton(
         onPressed: () {

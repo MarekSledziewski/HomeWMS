@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:home_wms/model/products/products.dart';
-import 'package:home_wms/producer/bloc/producer_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'products_list_event.dart';

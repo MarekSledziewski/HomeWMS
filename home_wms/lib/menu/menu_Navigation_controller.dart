@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:home_wms/add/ui/add_new_screen.dart';
+import 'package:home_wms/add/ui/add_to_exsisting.dart';
 import 'package:home_wms/category/ui/category_screen.dart';
 import 'package:home_wms/delete/ui/delete_screen.dart';
 import 'package:home_wms/loading_animation.dart';
@@ -15,7 +16,11 @@ class MenuNavigationController   {
 
   navigate(_buttonName, context){
                 switch (_buttonName) {
-                  case "Add":
+                  case "Add New":
+                    {
+                      return _animateToAddNew(context);
+                    }
+                      case "Add":
                     {
                       return _animateToAdd(context);
                     }
@@ -39,12 +44,16 @@ class MenuNavigationController   {
                     {
                       return _animateToCategories(context);
                     }
+
                 }
               }
       
 
+  _animateToAddNew(context) => Navigator.push(
+      context, new MaterialPageRoute(builder: (context) => _buildHiveAddNewScreen()));
+
   _animateToAdd(context) => Navigator.push(
-      context, new MaterialPageRoute(builder: (context) => _addScreen()));
+      context, new MaterialPageRoute(builder: (context) => _buildHiveAddScreen()));
 
   _animateToDelete(context) => Navigator.push(
       context, new MaterialPageRoute(builder: (context) => DeleteScreen()));
@@ -76,6 +85,20 @@ Widget _buildHiveProductsList() {
         return LoadingAnimation();
       });
 }
+Widget _buildHiveAddScreen() {
+  return FutureBuilder(
+      future: Hive.openBox('products'),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return throw (snapshot.error.toString());
+          } else {
+            return AddToExsisting();
+          }
+        }
+        return LoadingAnimation();
+      });
+}
 
 Widget _buildHiveCategories() {
   return FutureBuilder(
@@ -91,7 +114,7 @@ Widget _buildHiveCategories() {
         return LoadingAnimation();
       });
 }
-  Widget _addScreen() => FutureBuilder(
+  Widget _buildHiveAddNewScreen() => FutureBuilder(
         future: Hive.openBox('categories'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {

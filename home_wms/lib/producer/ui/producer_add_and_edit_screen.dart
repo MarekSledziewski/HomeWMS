@@ -68,7 +68,7 @@ class AddProducerScreen extends StatelessWidget {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Name'));
+          labelText: 'Name'));
 
   Widget producerAdressTextField(context) => TextField(
       onEditingComplete: () {
@@ -90,7 +90,7 @@ class AddProducerScreen extends StatelessWidget {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Adress'));
+          labelText: 'Adress'));
 
   Widget producerDescryptionField(context) => TextField(
       maxLines: 20,
@@ -112,7 +112,7 @@ class AddProducerScreen extends StatelessWidget {
           counter: Offstage(),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: 'Descryptiom'));
+          labelText: 'Descryptiom'));
 
   Widget _okButton(context) => OutlinedButton(
         style: ButtonStyle(

@@ -16,7 +16,6 @@ class ProductsListScreen extends StatefulWidget {
 }
 
 class ProductsListScreenState extends State<ProductsListScreen> {
-  final searchTextFieldController = TextEditingController();
   final productsBox = Hive.box('products');
 
   @override
@@ -126,7 +125,7 @@ class ProductsListScreenState extends State<ProductsListScreen> {
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              'Producent: ' + product.producer,
+                              'Producer: ' + product.producer,
                               textAlign: TextAlign.left,
                             )
                           ]),
@@ -154,13 +153,14 @@ class ProductsListScreenState extends State<ProductsListScreen> {
 
   Widget _searchField() => TextField(
       onEditingComplete: () {
-        _getSearch();
         FocusScope.of(context).unfocus();
+      },
+      onChanged: (text) {
+        _getSearch(text);
       },
       textInputAction: TextInputAction.next,
       maxLength: 50,
       maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: searchTextFieldController,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
@@ -175,10 +175,10 @@ class ProductsListScreenState extends State<ProductsListScreen> {
           fillColor: Colors.white,
           border: InputBorder.none,
           prefixIcon: Icon(Icons.search),
-          hintText: 'Search'));
+          labelText: 'Search'));
 
-  _getSearch() => BlocProvider.of<ProductsListBloc>(context)
-      .add(GetSearchEvent(searchTextFieldController.text));
+  _getSearch(text) => BlocProvider.of<ProductsListBloc>(context)
+      .add(GetSearchEvent(text));
 
   _navigateToEditScreen(product) {
     Navigator.push(

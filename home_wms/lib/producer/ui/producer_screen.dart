@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -145,7 +144,7 @@ class ProducerScreenState extends State<ProducerScreen> {
           fillColor: Colors.white,
           border: InputBorder.none,
           prefixIcon: Icon(Icons.search),
-          hintText: 'Search'));
+          labelText: 'Search'));
 
   _getSearch() => BlocProvider.of<ProducerBloc>(context)
       .add(GetSearchEvent(searchTextFieldController.text));
