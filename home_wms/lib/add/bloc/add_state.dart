@@ -8,13 +8,16 @@ abstract class AddState extends Equatable {
 
 class InitialAddState extends AddState {}
 
+class RefreshAddState extends AddState {}
+
 class ProductAddingState extends AddState {}
 
 class ProdcutAddedSimilarState extends AddState {
 }
 class ProdcutAddedState extends AddState {
 }
-
+class ClearState extends AddState {
+}
 class ProductExsistsState extends AddState {
   final Product product;
   ProductExsistsState(this.product);

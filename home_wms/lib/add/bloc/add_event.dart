@@ -10,6 +10,11 @@ class AddProductEvent extends AddEvent {
   @override
   List<Object?> get props => [product];
 }
+class RefreshAddEvent extends AddEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 
 class EditEvent extends AddEvent {
   @override

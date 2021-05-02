@@ -60,19 +60,15 @@ class AddScreenState extends State<AddScreen> {
           } else if (state is ProductAddingState) {
             return LoadingAnimation();
           } else if (state is ProdcutAddedState) {
-            productNameFieldController.clear();
-            quantityFieldController.clear();
-            productPriceFieldController.clear();
-            productBarCodeFieldController.clear();
-            choosenProducerValue = listProducers.first;
-            choosenCategoryValue = listCategories.first;
+            return _buildBody();
+          } else if (state is ClearState) {
             return _buildBody();
           } else if (state is ProdcutAddedSimilarState) {
             return _buildBody();
           } else if (state is ProductExsistsState) {
             return _productExsist(state.product);
           } else {
-            return Center(child: Text('Error on Bloc Builder'));
+            return _buildBody();
           }
         },
       );
@@ -257,37 +253,40 @@ class AddScreenState extends State<AddScreen> {
   _addEvent() {
     if (productPriceFieldController.text.isEmpty ||
         quantityFieldController.text.isEmpty) {
-           if (productPriceFieldController.text.isEmpty &&
-              quantityFieldController.text.isEmpty)
-              {
+      if (productPriceFieldController.text.isEmpty &&
+          quantityFieldController.text.isEmpty) {
+        BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
+          productNameFieldController.text,
+          0,
+          productBarCodeFieldController.text,
+          choosenCategoryValue,
+          choosenProducerValue.name,
+          0,
+        )));
+                    _clearFields();
+
+      } else {
+        if (productPriceFieldController.text.isEmpty) {
           BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
-          productNameFieldController.text,
-          0,
-          productBarCodeFieldController.text,
-          choosenCategoryValue,
-          choosenProducerValue.name,
-          0,
-        )));
-              } else {if (productPriceFieldController.text.isEmpty) {
-        BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
-          productNameFieldController.text,
-          int.parse(quantityFieldController.text),
-          productBarCodeFieldController.text,
-          choosenCategoryValue,
-          choosenProducerValue.name,
-          0,
-        )));
-      } else if (quantityFieldController.text.isEmpty) {
-        BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
-          productNameFieldController.text,
-          0,
-          productBarCodeFieldController.text,
-          choosenCategoryValue,
-          choosenProducerValue.name,
-         double.parse(productPriceFieldController.text),
-        )));
-      }
-      
+            productNameFieldController.text,
+            int.parse(quantityFieldController.text),
+            productBarCodeFieldController.text,
+            choosenCategoryValue,
+            choosenProducerValue.name,
+            0,
+          )));            _clearFields();
+
+        } else if (quantityFieldController.text.isEmpty) {
+          BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
+            productNameFieldController.text,
+            0,
+            productBarCodeFieldController.text,
+            choosenCategoryValue,
+            choosenProducerValue.name,
+            double.parse(productPriceFieldController.text),
+          )));
+                    _clearFields();
+}
       }
       Navigator.pop(context);
     } else if (_doubleIsCorrect()) {
@@ -300,7 +299,8 @@ class AddScreenState extends State<AddScreen> {
         double.parse(productPriceFieldController.text),
       )));
       Navigator.pop(context);
-    } else {
+                _clearFields();
+} else {
       _correctPrice();
     }
   }
@@ -515,7 +515,7 @@ class AddScreenState extends State<AddScreen> {
                         .firstWhere(
                             (element) => element.name == product.producer);
                   }
-                  
+
                   choosenCategoryValue = product.category;
                   BlocProvider.of<AddBloc>(context).add(EditEvent());
                 }),
@@ -540,12 +540,22 @@ class AddScreenState extends State<AddScreen> {
                 onPressed: () {
                   BlocProvider.of<AddBloc>(context).add(
                     AddQuanitiEvent(product.quantity, product.name),
-                  );
+                  );            _clearFields();
+
                 })
           ],
         )
       ],
     );
+  }
+
+  _clearFields() {
+    productNameFieldController.clear();
+    quantityFieldController.clear();
+    productPriceFieldController.clear();
+    productBarCodeFieldController.clear();
+    choosenProducerValue = listProducers.first;
+    choosenCategoryValue = listCategories.first;
   }
 
   AppBar _buildAppbar() => AppBar(

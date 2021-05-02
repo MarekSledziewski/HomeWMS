@@ -41,32 +41,38 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       }
     } else if (event is FindByScanner) {
       yield ProductAddingState();
-     yield ProdcutFindedState( _findProductByScanner(event));
+      yield ProdcutFindedState(_findProductByScanner(event));
+    } else if (event is RefreshAddEvent) {
+      yield RefreshAddState();
     } else if (event is EditEvent) {
       yield ProdcutAddedSimilarState();
     } else if (event is AddQuanitiEvent) {
-      _addQuantiti(event);
+      yield ProductAddingState();
+      _addQuantity(event);
       yield ProdcutAddedState();
     }
   }
 
-  _addQuantiti(event) {
+  _addQuantity(event) {
     Map productBox = Hive.box('products').toMap();
-
-    var index = productBox.keys.firstWhere((key) =>
-        productBox[key].name.replaceAll(" ", "").toLowerCase() ==
-        event.name.replaceAll(" ", "").toLowerCase());
-    Product product;
-    product = productBox[index];
-    product.quantity = event.quantity + product.quantity;
-    Hive.box("products").put(index, product);
+    if (productBox.values.any((product) => product.name == event.name)) {
+      var index = productBox.keys.firstWhere((key) =>
+          productBox[key].name.toLowerCase() == event.name.toLowerCase());
+      Product product;
+      product = productBox[index];
+      product.quantity = event.quantity + product.quantity;
+      Hive.box("products").put(index, product);
+    }
   }
-  _findProductByScanner(event) 
-  {
-    Map productBox = Hive.box('products').toMap();
 
-    var index = productBox.keys.firstWhere((key) =>
-        productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
-        event.barcode.replaceAll(" ", "").toLowerCase());
-    return  Hive.box("products").get(index);}
+  _findProductByScanner(event) {
+    Map productBox = Hive.box('products').toMap();
+    if (productBox.values.any((product) => product.barcode == event.barcode)) {
+      var index = productBox.keys.firstWhere((key) =>
+          productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
+          event.barcode.replaceAll(" ", "").toLowerCase());
+      return Hive.box("products").get(index);
+    } else
+      return Product('', 0, '', '', '', 0);
+  }
 }
