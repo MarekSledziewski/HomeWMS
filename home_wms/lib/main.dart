@@ -15,7 +15,7 @@ import 'model/products/products.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
+  await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   Hive.registerAdapter(ProductAdapter());
   Hive.registerAdapter(ProducerAdapter());
@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
     return buildProviders();
   }
 
-  Widget buildProviders() => MultiBlocProvider(providers: [
+  Widget buildProviders() =>
+      MultiBlocProvider(providers: [
         BlocProvider<ProductsListBloc>(
           create: (BuildContext context) => ProductsListBloc(),
         ),

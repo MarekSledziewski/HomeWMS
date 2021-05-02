@@ -14,15 +14,21 @@ class ProductAddingState extends AddState {}
 
 class ProdcutAddedSimilarState extends AddState {
 }
+
 class ProdcutAddedState extends AddState {
 }
+
 class ClearState extends AddState {
 }
+
 class ProductExsistsState extends AddState {
   final Product product;
+
   ProductExsistsState(this.product);
 }
+
 class ProdcutFindedState extends AddState {
   final Product product;
+
   ProdcutFindedState(this.product);
 }

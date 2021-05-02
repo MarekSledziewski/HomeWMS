@@ -6,15 +6,14 @@ import 'package:hive/hive.dart';
 import 'package:home_wms/model/products/products.dart';
 
 part 'category_event.dart';
+
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc() : super(CategoryInitial());
 
   @override
-  Stream<CategoryState> mapEventToState(
-    CategoryEvent event,
-  ) async* {
+  Stream<CategoryState> mapEventToState(CategoryEvent event,) async* {
     if (event is LoadCategoriesEvent) {
       yield LoadedCategoryListState();
     } else if (event is GetSearchEvent) {
@@ -22,7 +21,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       var categorysBox = Hive.box('categories');
       List listOfCategorysValues = List.empty();
       listOfCategorysValues = categorysBox.values
-          .where((element) => element
+          .where((element) =>
+          element
               .toString()
               .toLowerCase()
               .replaceAll(" ", "")
@@ -34,10 +34,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       yield LoadingCategoryListState();
       var categorysBox = Hive.box('categories').toMap();
       if (categorysBox.values.any((element) =>
-          element.toLowerCase().replaceAll(" ", "") ==
+      element.toLowerCase().replaceAll(" ", "") ==
           event.categoryName.toLowerCase().replaceAll(" ", ""))) {
-                    yield CategoryExsistsState();
-
+        yield CategoryExsistsState();
       } else {
         _addCategory(event);
         yield LoadedCategoryListState();

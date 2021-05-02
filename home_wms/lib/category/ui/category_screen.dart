@@ -45,7 +45,8 @@ class CategoryScreenState extends State<CategoryScreen> {
         ]));
   }
 
-  AppBar _buildAppbar() => AppBar(
+  AppBar _buildAppbar() =>
+      AppBar(
         title: (Text("Categories")),
         backgroundColor: Colors.amber,
         centerTitle: true,
@@ -82,7 +83,8 @@ class CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget _listTile(String category) => Slidable(
+  Widget _listTile(String category) =>
+      Slidable(
           actionPane: SlidableDrawerActionPane(),
           actionExtentRatio: 0.25,
           child: Container(
@@ -113,104 +115,113 @@ class CategoryScreenState extends State<CategoryScreen> {
                 caption: 'Delete',
                 color: Colors.blue,
                 icon: Icons.delete,
-                onTap: () => {
-                      _deleteCategory(category),
-                    })
+                onTap: () =>
+                {
+                  _deleteCategory(category),
+                })
           ]);
 
-  Widget _searchField() => TextField(
-      onEditingComplete: () {
-        _getSearch();
-        FocusScope.of(context).unfocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: searchTextFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          prefixIcon: Icon(Icons.search),
-          labelText: 'Search'));
+  Widget _searchField() =>
+      TextField(
+          onEditingComplete: () {
+            _getSearch();
+            FocusScope.of(context).unfocus();
+          },
+          textInputAction: TextInputAction.next,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: searchTextFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              prefixIcon: Icon(Icons.search),
+              labelText: 'Search'));
 
-  _getSearch() => BlocProvider.of<CategoryBloc>(context)
-      .add(GetSearchEvent(searchTextFieldController.text));
+  _getSearch() =>
+      BlocProvider.of<CategoryBloc>(context)
+          .add(GetSearchEvent(searchTextFieldController.text));
 
-  Widget _addCategoryButton() => FloatingActionButton(
-      backgroundColor: Colors.redAccent,
-      hoverColor: Colors.redAccent,
-      splashColor: Colors.redAccent,
-      onPressed: () => {
+  Widget _addCategoryButton() =>
+      FloatingActionButton(
+          backgroundColor: Colors.redAccent,
+          hoverColor: Colors.redAccent,
+          splashColor: Colors.redAccent,
+          onPressed: () =>
+          {
             _addDialog(),
           },
-      child: Icon(
-        Icons.add,
-      ));
+          child: Icon(
+            Icons.add,
+          ));
 
   _deleteCategory(category) {
     BlocProvider.of<CategoryBloc>(context).add(DeleteCategoryEvent(category));
   }
 
-  _addDialog() => showDialog(
-      context: context,
-      builder: (BuildContext _context) => AlertDialog(
-            title: Text('Add Category'),
-            actions: [
-              OutlinedButton(
-                onPressed: () => Navigator.pop(_context),
-                child: Text('Cancel'),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  if (_addTextFieldController.text.isNotEmpty) {
-                    _addEvent();
-                    Navigator.pop(_context);
-                    _addTextFieldController.clear();
-                  }
-                },
-                child: Text('Add'),
-              ),
-            ],
-            content: TextField(
-              controller: _addTextFieldController,
-              decoration: InputDecoration(labelText: "Category"),
-            ),
-          ));
+  _addDialog() =>
+      showDialog(
+          context: context,
+          builder: (BuildContext _context) =>
+              AlertDialog(
+                title: Text('Add Category'),
+                actions: [
+                  OutlinedButton(
+                    onPressed: () => Navigator.pop(_context),
+                    child: Text('Cancel'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      if (_addTextFieldController.text.isNotEmpty) {
+                        _addEvent();
+                        Navigator.pop(_context);
+                        _addTextFieldController.clear();
+                      }
+                    },
+                    child: Text('Add'),
+                  ),
+                ],
+                content: TextField(
+                  controller: _addTextFieldController,
+                  decoration: InputDecoration(labelText: "Category"),
+                ),
+              ));
 
-  _editDialog(String _category) => showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-            title: Text('Edit Category'),
-            actions: [
-              OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('Cancel'),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  if (_editTextFieldController.text.isNotEmpty) {
-                    _editEvent(_category);
-                    Navigator.pop(context);
-                    _editTextFieldController.clear();
-                  }
-                },
-                child: Text('Apply'),
-              ),
-            ],
-            content: TextField(
-              controller: _editTextFieldController,
-              decoration: InputDecoration(labelText: "Category"),
-            ),
-          ));
+  _editDialog(String _category) =>
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(
+                title: Text('Edit Category'),
+                actions: [
+                  OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text('Cancel'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      if (_editTextFieldController.text.isNotEmpty) {
+                        _editEvent(_category);
+                        Navigator.pop(context);
+                        _editTextFieldController.clear();
+                      }
+                    },
+                    child: Text('Apply'),
+                  ),
+                ],
+                content: TextField(
+                  controller: _editTextFieldController,
+                  decoration: InputDecoration(labelText: "Category"),
+                ),
+              ));
 
   _editEvent(_category) {
     BlocProvider.of<CategoryBloc>(context)
@@ -222,7 +233,8 @@ class CategoryScreenState extends State<CategoryScreen> {
         .add(AddCategoryEvent(_addTextFieldController.text));
   }
 
-  Widget _buildAlreadyExsist() => Column(
+  Widget _buildAlreadyExsist() =>
+      Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -230,11 +242,11 @@ class CategoryScreenState extends State<CategoryScreen> {
             OutlinedButton(
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     return Colors.redAccent;
                   }),
                   overlayColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.red.shade900;
                     }

@@ -34,14 +34,22 @@ class AddScreenState extends State<AddScreen> {
   late List listCategories;
   late Producer choosenProducerValue;
   late List<Producer> listProducers;
+
   @override
   void initState() {
-    listCategories = Hive.box('categories').values.toList();
+    listCategories = Hive
+        .box('categories')
+        .values
+        .toList();
 
     listCategories.insert(0, 'Uncategorized');
     choosenCategoryValue = listCategories.first;
 
-    listProducers = Hive.box('producers').values.cast<Producer>().toList();
+    listProducers = Hive
+        .box('producers')
+        .values
+        .cast<Producer>()
+        .toList();
 
     listProducers.insert(0, Producer('Producer Unknown', '', ''));
     choosenProducerValue = listProducers.first;
@@ -53,7 +61,8 @@ class AddScreenState extends State<AddScreen> {
   final productBarCodeFieldController = TextEditingController();
   final productPriceFieldController = TextEditingController();
 
-  Widget _buildBloc() => BlocBuilder<AddBloc, AddState>(
+  Widget _buildBloc() =>
+      BlocBuilder<AddBloc, AddState>(
         builder: (context, state) {
           if (state is InitialAddState) {
             return _buildBody();
@@ -73,7 +82,8 @@ class AddScreenState extends State<AddScreen> {
         },
       );
 
-  Widget _buildBody() => ListView(
+  Widget _buildBody() =>
+      ListView(
         children: [
           productNameTextField(),
           productCategoryField(),
@@ -91,141 +101,150 @@ class AddScreenState extends State<AddScreen> {
         ],
       );
 
-  Widget productNameTextField() => TextField(
-      onEditingComplete: () {
-        FocusScope.of(context).nextFocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 100,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productNameFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'Name'));
-
-  Widget productCategoryField() => Container(
-      child: DropdownButton(
-          isExpanded: true,
-          value: choosenCategoryValue,
-          onChanged: (value) {
-            setState(() {
-              choosenCategoryValue = value.toString();
-            });
+  Widget productNameTextField() =>
+      TextField(
+          onEditingComplete: () {
+            FocusScope.of(context).nextFocus();
           },
-          items: listCategories
-              .map((categoryValue) => DropdownMenuItem(
-                  value: categoryValue,
-                  child: Text(
-                    categoryValue,
-                  )))
-              .toList()));
+          textInputAction: TextInputAction.next,
+          maxLength: 100,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: productNameFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'Name'));
 
-  Widget productProducerField() => Container(
-      child: DropdownButton(
-          isExpanded: true,
-          value: choosenProducerValue,
-          onChanged: (value) {
-            setState(() {
-              choosenProducerValue = value as Producer;
-            });
+  Widget productCategoryField() =>
+      Container(
+          child: DropdownButton(
+              isExpanded: true,
+              value: choosenCategoryValue,
+              onChanged: (value) {
+                setState(() {
+                  choosenCategoryValue = value.toString();
+                });
+              },
+              items: listCategories
+                  .map((categoryValue) =>
+                  DropdownMenuItem(
+                      value: categoryValue,
+                      child: Text(
+                        categoryValue,
+                      )))
+                  .toList()));
+
+  Widget productProducerField() =>
+      Container(
+          child: DropdownButton(
+              isExpanded: true,
+              value: choosenProducerValue,
+              onChanged: (value) {
+                setState(() {
+                  choosenProducerValue = value as Producer;
+                });
+              },
+              items: listProducers
+                  .map((producerValue) =>
+                  DropdownMenuItem(
+                      value: producerValue,
+                      child: Text(
+                        producerValue.name,
+                      )))
+                  .toList()));
+
+  Widget productBarCodeTextField() =>
+      TextField(
+          onEditingComplete: () {
+            FocusScope.of(context).nextFocus();
           },
-          items: listProducers
-              .map((producerValue) => DropdownMenuItem(
-                  value: producerValue,
-                  child: Text(
-                    producerValue.name,
-                  )))
-              .toList()));
+          textInputAction: TextInputAction.next,
+          maxLength: 100,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: productBarCodeFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'Bar Code'));
 
-  Widget productBarCodeTextField() => TextField(
-      onEditingComplete: () {
-        FocusScope.of(context).nextFocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 100,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productBarCodeFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'Bar Code'));
+  Widget productQuantityField() =>
+      TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          ],
+          onEditingComplete: () {
+            FocusScope.of(context).unfocus();
+          },
+          textInputAction: TextInputAction.next,
+          maxLength: 20,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: quantityFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'Quantity'));
 
-  Widget productQuantityField() => TextField(
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-      ],
-      onEditingComplete: () {
-        FocusScope.of(context).unfocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 20,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: quantityFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'Quantity'));
+  Widget productPriceField() =>
+      TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9 .]')),
+          ],
+          onEditingComplete: () {
+            FocusScope.of(context).unfocus();
+          },
+          textInputAction: TextInputAction.next,
+          maxLength: 20,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: productPriceFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'Price'));
 
-  Widget productPriceField() => TextField(
-      keyboardType: TextInputType.number,
-      inputFormatters: <TextInputFormatter>[
-        FilteringTextInputFormatter.allow(RegExp(r'[0-9 .]')),
-      ],
-      onEditingComplete: () {
-        FocusScope.of(context).unfocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 20,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productPriceFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'Price'));
-
-  Widget _buildAddButton() => OutlinedButton(
+  Widget _buildAddButton() =>
+      OutlinedButton(
         onPressed: () {
           if (productNameFieldController.text.isEmpty) {
             _emptyFields();
@@ -263,8 +282,7 @@ class AddScreenState extends State<AddScreen> {
           choosenProducerValue.name,
           0,
         )));
-                    _clearFields();
-
+        _clearFields();
       } else {
         if (productPriceFieldController.text.isEmpty) {
           BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
@@ -274,8 +292,8 @@ class AddScreenState extends State<AddScreen> {
             choosenCategoryValue,
             choosenProducerValue.name,
             0,
-          )));            _clearFields();
-
+          )));
+          _clearFields();
         } else if (quantityFieldController.text.isEmpty) {
           BlocProvider.of<AddBloc>(context).add(AddProductEvent(Product(
             productNameFieldController.text,
@@ -285,8 +303,8 @@ class AddScreenState extends State<AddScreen> {
             choosenProducerValue.name,
             double.parse(productPriceFieldController.text),
           )));
-                    _clearFields();
-}
+          _clearFields();
+        }
       }
       Navigator.pop(context);
     } else if (_doubleIsCorrect()) {
@@ -299,8 +317,8 @@ class AddScreenState extends State<AddScreen> {
         double.parse(productPriceFieldController.text),
       )));
       Navigator.pop(context);
-                _clearFields();
-} else {
+      _clearFields();
+    } else {
       _correctPrice();
     }
   }
@@ -314,138 +332,143 @@ class AddScreenState extends State<AddScreen> {
     }
   }
 
-  _correctPrice() => showDialog(
-      context: context,
-      builder: (BuildContext context) =>
-          AlertDialog(title: Text('Incorect price value'), actions: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ButtonStyle(
-                backgroundColor:
+  _correctPrice() =>
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(title: Text('Incorect price value'), actions: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
                     MaterialStateProperty.resolveWith<Color>((states) {
-                  return Colors.redAccent;
-                }),
-                overlayColor:
+                      return Colors.redAccent;
+                    }),
+                    overlayColor:
                     MaterialStateProperty.resolveWith<Color>((states) {
-                  if (states.contains(MaterialState.pressed)) {
-                    return Colors.red.shade900;
-                  }
-                  return Colors.transparent;
-                }),
-              ),
-              child: Text(
-                "Ok",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ]));
+                      if (states.contains(MaterialState.pressed)) {
+                        return Colors.red.shade900;
+                      }
+                      return Colors.transparent;
+                    }),
+                  ),
+                  child: Text(
+                    "Ok",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ]));
 
-  _addConfirmDialog() => showDialog(
+  _addConfirmDialog() =>
+      showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-            title: Text('Add Product?'),
-            content: Text('Add your product to the Database'),
-            actionsOverflowButtonSpacing: 30,
-            actions: [
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor:
+        builder: (BuildContext context) =>
+            AlertDialog(
+                title: Text('Add Product?'),
+                content: Text('Add your product to the Database'),
+                actionsOverflowButtonSpacing: 30,
+                actions: [
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    return Colors.blueAccent;
-                  }),
-                  overlayColor:
+                        return Colors.blueAccent;
+                      }),
+                      overlayColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    if (states.contains(MaterialState.pressed)) {
-                      return Colors.blue.shade900;
-                    }
-                    return Colors.transparent;
-                  }),
-                ),
-                child: Text(
-                  "Cancel",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  if (productBarCodeFieldController.text.isEmpty) {
-                    productBarCodeFieldController.text =
-                        productNameFieldController.text;
-                  }
-                  _addEvent();
-                },
-                style: ButtonStyle(
-                  backgroundColor:
+                        if (states.contains(MaterialState.pressed)) {
+                          return Colors.blue.shade900;
+                        }
+                        return Colors.transparent;
+                      }),
+                    ),
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      if (productBarCodeFieldController.text.isEmpty) {
+                        productBarCodeFieldController.text =
+                            productNameFieldController.text;
+                      }
+                      _addEvent();
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    return Colors.redAccent;
-                  }),
-                  overlayColor:
+                        return Colors.redAccent;
+                      }),
+                      overlayColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    if (states.contains(MaterialState.pressed)) {
-                      return Colors.red.shade900;
-                    }
-                    return Colors.transparent;
-                  }),
-                ),
-                child: Text(
-                  "Add",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ]),
+                        if (states.contains(MaterialState.pressed)) {
+                          return Colors.red.shade900;
+                        }
+                        return Colors.transparent;
+                      }),
+                    ),
+                    child: Text(
+                      "Add",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ]),
       );
 
-  _emptyFields() => showDialog(
-      context: context,
-      builder: (BuildContext context) =>
-          AlertDialog(title: Text('Fill requaierd fields'), actions: [
-            OutlinedButton(
-                style: ButtonStyle(
-                  backgroundColor:
+  _emptyFields() =>
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(title: Text('Fill requaierd fields'), actions: [
+                OutlinedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    return Colors.redAccent;
-                  }),
-                  overlayColor:
+                        return Colors.redAccent;
+                      }),
+                      overlayColor:
                       MaterialStateProperty.resolveWith<Color>((states) {
-                    if (states.contains(MaterialState.pressed)) {
-                      return Colors.red.shade900;
-                    }
-                    return Colors.transparent;
-                  }),
-                ),
-                child: Text(
-                  "Ok",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                })
-          ]));
+                        if (states.contains(MaterialState.pressed)) {
+                          return Colors.red.shade900;
+                        }
+                        return Colors.transparent;
+                      }),
+                    ),
+                    child: Text(
+                      "Ok",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ]));
 
-  _scannerButtonAction() => OutlinedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          return Colors.amberAccent;
-        }),
-        overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return Colors.amber.shade900;
-          }
-          return Colors.transparent;
-        }),
-      ),
-      child: Text(
-        "Scann",
-        style: TextStyle(color: Colors.white),
-      ),
-      onPressed: () {
-        _scanBarcode();
-      });
+  _scannerButtonAction() =>
+      OutlinedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+              return Colors.amberAccent;
+            }),
+            overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+              if (states.contains(MaterialState.pressed)) {
+                return Colors.amber.shade900;
+              }
+              return Colors.transparent;
+            }),
+          ),
+          child: Text(
+            "Scann",
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            _scanBarcode();
+          });
 
   Future<void> _scanBarcode() async {
     final String barcode = await FlutterBarcodeScanner.scanBarcode(
@@ -466,11 +489,11 @@ class AddScreenState extends State<AddScreen> {
             OutlinedButton(
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     return Colors.blueAccent;
                   }),
                   overlayColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.blue.shade900;
                     }
@@ -487,11 +510,11 @@ class AddScreenState extends State<AddScreen> {
             OutlinedButton(
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     return Colors.redAccent;
                   }),
                   overlayColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.red.shade900;
                     }
@@ -507,9 +530,9 @@ class AddScreenState extends State<AddScreen> {
                   quantityFieldController.text = product.quantity.toString();
                   productPriceFieldController.text = product.price.toString();
                   productBarCodeFieldController.text = product.name;
-                  if (product.producer == 'Producer Unknown') {
-                  } else {
-                    choosenProducerValue = Hive.box('producers')
+                  if (product.producer == 'Producer Unknown') {} else {
+                    choosenProducerValue = Hive
+                        .box('producers')
                         .values
                         .cast<Producer>()
                         .firstWhere(
@@ -522,11 +545,11 @@ class AddScreenState extends State<AddScreen> {
             OutlinedButton(
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     return Colors.redAccent;
                   }),
                   overlayColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
+                  MaterialStateProperty.resolveWith<Color>((states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.red.shade900;
                     }
@@ -540,8 +563,8 @@ class AddScreenState extends State<AddScreen> {
                 onPressed: () {
                   BlocProvider.of<AddBloc>(context).add(
                     AddQuanitiEvent(product.quantity, product.name),
-                  );            _clearFields();
-
+                  );
+                  _clearFields();
                 })
           ],
         )
@@ -558,7 +581,8 @@ class AddScreenState extends State<AddScreen> {
     choosenCategoryValue = listCategories.first;
   }
 
-  AppBar _buildAppbar() => AppBar(
+  AppBar _buildAppbar() =>
+      AppBar(
         title: (Text("Add New Product")),
         backgroundColor: Colors.redAccent,
         centerTitle: true,

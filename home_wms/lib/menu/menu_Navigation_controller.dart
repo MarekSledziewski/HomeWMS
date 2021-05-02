@@ -11,64 +11,74 @@ import 'package:home_wms/prodcuts_list/ui/products_list_screen.dart';
 import 'package:home_wms/producer/ui/producer_screen.dart';
 
 
-class MenuNavigationController   {
+class MenuNavigationController {
 
 
-  navigate(_buttonName, context){
-                switch (_buttonName) {
-                  case "Add New":
-                    {
-                      return _animateToAddNew(context);
-                    }
-                      case "Add":
-                    {
-                      return _animateToAdd(context);
-                    }
-                  case "Delete":
-                    {
-                      return _animateToDelete(context);
-                    }
-                  case "Products":
-                    {
-                      return _animateToProductsList(context);
-                    }
-                  case "Options":
-                    {
-                      return _animateToOptions(context);
-                    }
-                  case "Producers":
-                    {
-                      return _animateToHistory(context);
-                    }
-                  case "Categories":
-                    {
-                      return _animateToCategories(context);
-                    }
+  navigate(_buttonName, context) {
+    switch (_buttonName) {
+      case "Add New":
+        {
+          return _animateToAddNew(context);
+        }
+      case "Add":
+        {
+          return _animateToAdd(context);
+        }
+      case "Delete":
+        {
+          return _animateToDelete(context);
+        }
+      case "Products":
+        {
+          return _animateToProductsList(context);
+        }
+      case "Options":
+        {
+          return _animateToOptions(context);
+        }
+      case "Producers":
+        {
+          return _animateToHistory(context);
+        }
+      case "Categories":
+        {
+          return _animateToCategories(context);
+        }
+    }
+  }
 
-                }
-              }
-      
 
-  _animateToAddNew(context) => Navigator.push(
-      context, new MaterialPageRoute(builder: (context) => _buildHiveAddNewScreen()));
+  _animateToAddNew(context) =>
+      Navigator.push(
+          context, new MaterialPageRoute(
+          builder: (context) => _buildHiveAddNewScreen()));
 
-  _animateToAdd(context) => Navigator.push(
-      context, new MaterialPageRoute(builder: (context) => _buildHiveAddScreen()));
+  _animateToAdd(context) =>
+      Navigator.push(
+          context,
+          new MaterialPageRoute(builder: (context) => _buildHiveAddScreen()));
 
-  _animateToDelete(context) => Navigator.push(
-      context, new MaterialPageRoute(builder: (context) => DeleteScreen()));
+  _animateToDelete(context) =>
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => DeleteScreen()));
 
-  _animateToOptions(context) => Navigator.push(
-      context, new MaterialPageRoute(builder: (context) => OptionsScreen()));
+  _animateToOptions(context) =>
+      Navigator.push(
+          context,
+          new MaterialPageRoute(builder: (context) => OptionsScreen()));
 
-  _animateToProductsList(context) => Navigator.push(context,
-      new MaterialPageRoute(builder: (context) => _buildHiveProductsList()));
+  _animateToProductsList(context) =>
+      Navigator.push(context,
+          new MaterialPageRoute(
+              builder: (context) => _buildHiveProductsList()));
 
-  _animateToCategories(context) => Navigator.push(context,
-      new MaterialPageRoute(builder: (context) => _buildHiveCategories()));
+  _animateToCategories(context) =>
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => _buildHiveCategories()));
 
-  _animateToHistory(context) => Navigator.push(context,
-      new MaterialPageRoute(builder: (context) => _buildHiveProducers()));
+  _animateToHistory(context) =>
+      Navigator.push(context,
+          new MaterialPageRoute(builder: (context) => _buildHiveProducers()));
 }
 
 Widget _buildHiveProductsList() {
@@ -85,6 +95,7 @@ Widget _buildHiveProductsList() {
         return LoadingAnimation();
       });
 }
+
 Widget _buildHiveAddScreen() {
   return FutureBuilder(
       future: Hive.openBox('products'),
@@ -114,7 +125,9 @@ Widget _buildHiveCategories() {
         return LoadingAnimation();
       });
 }
-  Widget _buildHiveAddNewScreen() => FutureBuilder(
+
+Widget _buildHiveAddNewScreen() =>
+    FutureBuilder(
         future: Hive.openBox('categories'),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -122,22 +135,22 @@ Widget _buildHiveCategories() {
               return throw (snapshot.error.toString());
             } else {
               return FutureBuilder(
-        future: Hive.openBox('producers'),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return throw (snapshot.error.toString());
-            } else {
-              return AddScreen();
+                  future: Hive.openBox('producers'),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return throw (snapshot.error.toString());
+                      } else {
+                        return AddScreen();
+                      }
+                    }
+                    return LoadingAnimation();
+                  });
             }
           }
           return LoadingAnimation();
         });
-            }
-          }
-          return LoadingAnimation();
-        });
-  
+
 Widget _buildHiveProducers() {
   return FutureBuilder(
       future: Hive.openBox('producers'),

@@ -13,7 +13,8 @@ class LoadingProdcutsListState extends ProductsListState {}
 class LoadedProdcutsListState extends ProductsListState {}
 
 class LoadedProductsListSearchState extends ProductsListState {
- final List listOfObjects;
+  final List listOfObjects;
+
   LoadedProductsListSearchState(this.listOfObjects);
 }
 

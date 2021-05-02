@@ -21,21 +21,24 @@ class ProductsListBloc extends Bloc<ProdcutsListEvent, ProductsListState> {
       var productBox = Hive.box('products');
       List listOfProductsValues = List.empty();
       listOfProductsValues += productBox.values
-          .where((element) => element.name
+          .where((element) =>
+          element.name
               .toString()
               .toLowerCase()
               .replaceAll(" ", "")
               .contains(event.searchText.replaceAll(" ", "").toLowerCase()))
           .toList();
       listOfProductsValues += productBox.values
-          .where((element) => element.category
+          .where((element) =>
+          element.category
               .toString()
               .toLowerCase()
               .replaceAll(" ", "")
               .contains(event.searchText.replaceAll(" ", "").toLowerCase()))
           .toList();
       listOfProductsValues += productBox.values
-          .where((element) => element.producer
+          .where((element) =>
+          element.producer
               .toString()
               .toLowerCase()
               .replaceAll(" ", "")
@@ -48,7 +51,7 @@ class ProductsListBloc extends Bloc<ProdcutsListEvent, ProductsListState> {
       Map productBox = Hive.box('products').toMap();
 
       var index = productBox.keys.firstWhere((key) =>
-          productBox[key].name.replaceAll(" ", "").toLowerCase() ==
+      productBox[key].name.replaceAll(" ", "").toLowerCase() ==
           event.oldproduct.name.replaceAll(" ", "").toLowerCase());
       Hive.box("products").put(index, event.product);
       yield LoadedProdcutsListState();

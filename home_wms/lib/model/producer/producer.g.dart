@@ -26,8 +26,7 @@ class ProducerAdapter extends TypeAdapter<Producer> {
   @override
   void write(BinaryWriter writer, Producer obj) {
     writer
-      ..writeByte(3)
-      ..writeByte(0)
+      ..writeByte(3)..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.adress)
@@ -41,7 +40,7 @@ class ProducerAdapter extends TypeAdapter<Producer> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProducerAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+          other is ProducerAdapter &&
+              runtimeType == other.runtimeType &&
+              typeId == other.typeId;
 }

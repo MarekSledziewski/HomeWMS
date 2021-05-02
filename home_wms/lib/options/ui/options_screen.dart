@@ -13,29 +13,29 @@ class OptionsScreenState extends State<OptionsScreen> {
     return Scaffold(
         body: Center(
             child: Column(children: [
-      Spacer(),
-      InkWell(
-          onTap: () async {
-            await Hive.openBox('products');
-            await Hive.box('products').deleteFromDisk();
-          },
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.yellowAccent,
-            child: Text("delete whole database products"),
-          )),
-      InkWell(
-          onTap: () async {
-            await Hive.openBox('categories');
-            await Hive.box('categories').deleteFromDisk();
-          },
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.yellowAccent,
-            child: Text("delete whole database Categories"),
-          ))
-    ])));
+              Spacer(),
+              InkWell(
+                  onTap: () async {
+                    await Hive.openBox('products');
+                    await Hive.box('products').deleteFromDisk();
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.yellowAccent,
+                    child: Text("delete whole database products"),
+                  )),
+              InkWell(
+                  onTap: () async {
+                    await Hive.openBox('categories');
+                    await Hive.box('categories').deleteFromDisk();
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.yellowAccent,
+                    child: Text("delete whole database Categories"),
+                  ))
+            ])));
   }
 }

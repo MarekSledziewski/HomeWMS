@@ -26,7 +26,8 @@ class DeleteScreenState extends State<DeleteScreen> {
   final productNameFieldController = TextEditingController();
   final quantityFieldController = TextEditingController();
 
-  Widget _buildBloc() => BlocBuilder<DeleteBloc, DeleteState>(
+  Widget _buildBloc() =>
+      BlocBuilder<DeleteBloc, DeleteState>(
         builder: (context, state) {
           if (state is InitialDeleteState) {
             return _buildBody();
@@ -43,7 +44,8 @@ class DeleteScreenState extends State<DeleteScreen> {
         },
       );
 
-  Widget _buildBody() => Column(
+  Widget _buildBody() =>
+      Column(
         children: [
           productNameTextField(),
           quantityField(),
@@ -54,54 +56,57 @@ class DeleteScreenState extends State<DeleteScreen> {
         ],
       );
 
-  Widget productNameTextField() => TextField(
-      onEditingComplete: () {
-        FocusScope.of(context).nextFocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 100,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: productNameFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'Name'));
+  Widget productNameTextField() =>
+      TextField(
+          onEditingComplete: () {
+            FocusScope.of(context).nextFocus();
+          },
+          textInputAction: TextInputAction.next,
+          maxLength: 100,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: productNameFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'Name'));
 
-  Widget quantityField() => TextField(
-      keyboardType: TextInputType.number,
-      onEditingComplete: () {
-        FocusScope.of(context).unfocus();
-      },
-      textInputAction: TextInputAction.next,
-      maxLength: 20,
-      maxLengthEnforcement: MaxLengthEnforcement.enforced,
-      controller: quantityFieldController,
-      decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          filled: true,
-          counter: Offstage(),
-          fillColor: Colors.white,
-          border: InputBorder.none,
-          labelText: 'quantity'));
+  Widget quantityField() =>
+      TextField(
+          keyboardType: TextInputType.number,
+          onEditingComplete: () {
+            FocusScope.of(context).unfocus();
+          },
+          textInputAction: TextInputAction.next,
+          maxLength: 20,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          controller: quantityFieldController,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              filled: true,
+              counter: Offstage(),
+              fillColor: Colors.white,
+              border: InputBorder.none,
+              labelText: 'quantity'));
 
-  Widget buildDeleteButton() => OutlinedButton(
+  Widget buildDeleteButton() =>
+      OutlinedButton(
         onPressed: () {
           if (productNameFieldController.text.isNotEmpty &&
               quantityFieldController.text.isNotEmpty) {
@@ -118,62 +123,69 @@ class DeleteScreenState extends State<DeleteScreen> {
           productNameFieldController.text,
           int.parse(quantityFieldController.text)));
 
-  _deleteConfirmDialog() => showDialog(
+  _deleteConfirmDialog() =>
+      showDialog(
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-            title: Text('Delete Product?'),
-            content: Text('Delete this product'),
-            actions: [
-              OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text("Cancel")),
-              OutlinedButton(
-                  onPressed: () {
-                    _deleteEvent(false);
-                    productNameFieldController.clear();
-                    quantityFieldController.clear();
-                    Navigator.pop(context);
-                  },
-                  child: Text("Delete")),
-              OutlinedButton(
-                  onPressed: () {
-                    _deleteEvent(true);
-                    Navigator.pop(context);
-                  },
-                  child: Text("Delete Similar"))
-            ]),
-      );
-  _noSuchProductDialog() => showDialog(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-            title: Text('Product not found'),
-            content: Text('There is no such prodcut in database'),
-            actions: [
-              OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "Ok",
-                    textAlign: TextAlign.center,
-                  )),
-            ]),
+        builder: (BuildContext context) =>
+            AlertDialog(
+                title: Text('Delete Product?'),
+                content: Text('Delete this product'),
+                actions: [
+                  OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Cancel")),
+                  OutlinedButton(
+                      onPressed: () {
+                        _deleteEvent(false);
+                        productNameFieldController.clear();
+                        quantityFieldController.clear();
+                        Navigator.pop(context);
+                      },
+                      child: Text("Delete")),
+                  OutlinedButton(
+                      onPressed: () {
+                        _deleteEvent(true);
+                        Navigator.pop(context);
+                      },
+                      child: Text("Delete Similar"))
+                ]),
       );
 
-  _emptyFields() => showDialog(
-      context: context,
-      builder: (BuildContext context) =>
-          AlertDialog(title: Text('Fill requaierd fields'), actions: [
-            OutlinedButton(
-                child: Text("Ok"),
-                onPressed: () {
-                  Navigator.pop(context);
-                })
-          ]));
+  _noSuchProductDialog() =>
+      showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            AlertDialog(
+                title: Text('Product not found'),
+                content: Text('There is no such prodcut in database'),
+                actions: [
+                  OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Ok",
+                        textAlign: TextAlign.center,
+                      )),
+                ]),
+      );
 
- AppBar _buildAppbar() => AppBar(
+  _emptyFields() =>
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              AlertDialog(title: Text('Fill requaierd fields'), actions: [
+                OutlinedButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ]));
+
+  AppBar _buildAppbar() =>
+      AppBar(
         title: (Text("Delete Product")),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,

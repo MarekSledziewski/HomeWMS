@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 part 'producer.g.dart';
 
 
@@ -8,8 +9,8 @@ class Producer {
   String name;
   @HiveField(1)
   String adress;
-   @HiveField(2)
+  @HiveField(2)
   String descryption;
 
-Producer(this.name, this.adress, this.descryption);
+  Producer(this.name, this.adress, this.descryption);
 }

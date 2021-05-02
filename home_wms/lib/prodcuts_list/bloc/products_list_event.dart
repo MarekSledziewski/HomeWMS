@@ -5,6 +5,7 @@ abstract class ProdcutsListEvent extends Equatable {}
 
 class GetSearchEvent extends ProdcutsListEvent {
   final String searchText;
+
   GetSearchEvent(this.searchText);
 
   @override
@@ -17,9 +18,11 @@ class LoadProductsEvent extends ProdcutsListEvent {
 }
 
 class EditProductEvent extends ProdcutsListEvent {
-  final Product oldproduct;
+  final Product oldProduct;
   final Product product;
-  EditProductEvent(this.oldproduct, this.product);
+
+  EditProductEvent(this.oldProduct, this.product);
+
   @override
   List<Object> get props => [];
 }

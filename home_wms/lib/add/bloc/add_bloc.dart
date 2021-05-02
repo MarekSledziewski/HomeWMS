@@ -23,7 +23,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       Box productBox = Hive.box('products');
       Product product = event.product;
       var listOfProductsValues = productBox.values.where((element) =>
-          element.name.replaceAll(" ", "").toLowerCase() ==
+      element.name.replaceAll(" ", "").toLowerCase() ==
           event.product.name.replaceAll(" ", "").toLowerCase());
 
       if (listOfProductsValues.isEmpty) {
@@ -57,7 +57,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
     Map productBox = Hive.box('products').toMap();
     if (productBox.values.any((product) => product.name == event.name)) {
       var index = productBox.keys.firstWhere((key) =>
-          productBox[key].name.toLowerCase() == event.name.toLowerCase());
+      productBox[key].name.toLowerCase() == event.name.toLowerCase());
       Product product;
       product = productBox[index];
       product.quantity = event.quantity + product.quantity;
@@ -69,7 +69,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
     Map productBox = Hive.box('products').toMap();
     if (productBox.values.any((product) => product.barcode == event.barcode)) {
       var index = productBox.keys.firstWhere((key) =>
-          productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
+      productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
           event.barcode.replaceAll(" ", "").toLowerCase());
       return Hive.box("products").get(index);
     } else

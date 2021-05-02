@@ -15,15 +15,22 @@ class DeleteBloc extends Bloc<DeleteEvent, DeleteState> {
   @override
   Stream<DeleteState> mapEventToState(DeleteEvent event) async* {
     if (event is DeleteProductEvent) {
-    var productBox = Hive.box('products');
+      var productBox = Hive.box('products');
       late Product tempInstanceOfProduct;
       var listOfProductsValues =
-          productBox.values.where((element) => element.name.replaceAll(" ", "").toLowerCase() == event.productName.replaceAll(" ", "").toLowerCase());
-          if(listOfProductsValues.isNotEmpty){
-      listOfProductsValues.forEach(
-          (element) => {tempInstanceOfProduct = element, tempInstanceOfProduct.quantity -= event.productQuantity});
-          }
-          else {
+      productBox.values.where((element) =>
+      element.name.replaceAll(" ", "")
+          .toLowerCase() ==
+          event.productName.replaceAll(" ", "").toLowerCase());
+      if (listOfProductsValues.isNotEmpty) {
+        listOfProductsValues.forEach(
+                (element) =>
+            {
+              tempInstanceOfProduct = element,
+              tempInstanceOfProduct.quantity -= event.productQuantity
+            });
+      }
+      else {
         yield NoSuchProductState();
       }
       yield ProdcutDeleted();

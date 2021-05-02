@@ -2,14 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74a1afa9-697e-42ea-b906-bea7c59e2c90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/auto_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/auto_complete.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_event.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/add/ui/add_new_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/ui/add_new_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/ui/add_to_exsisting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/ui/add_to_exsisting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/ui/category_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/ui/category_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/ui/delete_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/ui/delete_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/loading_animation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/loading_animation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/menu/menu_Navigation_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/menu/menu_Navigation_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/products/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/products/products.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/products/products.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/products/products.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_edit_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_edit_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_state.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +47,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/home_wms" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/home_wms/android" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -51,13 +76,13 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="296" y="118" width="1200" height="800" key="AVDManager/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619089772119" />
-    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1619948104620">
+    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1619949385261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619948104620" />
-    <state x="397" y="163" key="SettingsEditor" timestamp="1619089151750">
+    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619949385261" />
+    <state x="397" y="163" key="SettingsEditor" timestamp="1619949349235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="397" y="163" key="SettingsEditor/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619089151750" />
+    <state x="397" y="163" key="SettingsEditor/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619949349235" />
   </component>
 </project>
