@@ -1,37 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="74a1afa9-697e-42ea-b906-bea7c59e2c90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/auto_complete.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/auto_complete.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/bloc/add_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/add/ui/add_new_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/add/ui/add_new_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/bloc/category_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/category/ui/category_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/category/ui/category_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/bloc/delete_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/delete/ui/delete_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/delete/ui/delete_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/loading_animation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/loading_animation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/menu/menu_Navigation_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/menu/menu_Navigation_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/producer/producer.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/products/products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/products/products.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/model/products/products.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/model/products/products.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/main/kotlin/com/example/home_wms/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_edit_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_edit_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/producer/bloc/producer_state.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,16 +41,46 @@
   </component>
   <component name="ProjectId" id="1rWPi770zOXzPccz3zVYnTqFKXE" />
   <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$/home_wms/android" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/home_wms/android" />
     <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\msled\Documents\GitHub\HomeWMS\home_wms\android" />
+      <recent name="C:\Users\msled\Documents\GitHub\HomeWMS" />
+      <recent name="C:\Users\msled\Documents\GitHub\HomeWMS\home_wms\android\app" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="APK" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/home_wms/android" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -67,19 +95,51 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619090124753">
+    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619962759384">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619090124753" />
+    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962759384" />
+    <state x="676" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620071657865">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="676" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1620071657865" />
     <state x="296" y="118" width="1200" height="800" key="AVDManager" timestamp="1619089772119">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="296" y="118" width="1200" height="800" key="AVDManager/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619089772119" />
-    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1619949385261">
+    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1619962736461">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619949385261" />
+    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962736461" />
+    <state width="1882" height="279" key="GridCell.Tab.0.bottom" timestamp="1619962823720">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1882" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
+    <state width="1882" height="279" key="GridCell.Tab.0.center" timestamp="1619962823720">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1882" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
+    <state width="1882" height="279" key="GridCell.Tab.0.left" timestamp="1619962823720">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1882" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
+    <state width="1882" height="279" key="GridCell.Tab.0.right" timestamp="1619962823720">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1882" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
     <state x="397" y="163" key="SettingsEditor" timestamp="1619949349235">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

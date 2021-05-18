@@ -18,32 +18,41 @@ class ProductsListBloc extends Bloc<ProdcutsListEvent, ProductsListState> {
       yield LoadedProdcutsListState();
     } else if (event is GetSearchEvent) {
       yield LoadingProdcutsListState();
-      var productBox = Hive.box('products');
-      List listOfProductsValues = List.empty();
-      listOfProductsValues += productBox.values
-          .where((element) =>
-          element.name
-              .toString()
+      List<Product> productBoxList =
+          Hive.box('products').values.cast<Product>().toList();
+      List<Product> listOfProductsValues = List.empty();
+
+      listOfProductsValues += productBoxList
+          .where((element) => element.name
               .toLowerCase()
               .replaceAll(" ", "")
-              .contains(event.searchText.replaceAll(" ", "").toLowerCase()))
+              .contains(event.searchText.toLowerCase().replaceAll(" ", "")))
           .toList();
-      listOfProductsValues += productBox.values
-          .where((element) =>
-          element.category
-              .toString()
+      productBoxList.removeWhere((element) => element.name
+          .toLowerCase()
+          .replaceAll(" ", "")
+          .contains(event.searchText.toLowerCase().replaceAll(" ", "")));
+
+      listOfProductsValues += productBoxList
+          .where((element) => element.category
               .toLowerCase()
               .replaceAll(" ", "")
-              .contains(event.searchText.replaceAll(" ", "").toLowerCase()))
+              .contains(event.searchText.toLowerCase().replaceAll(" ", "")))
           .toList();
-      listOfProductsValues += productBox.values
-          .where((element) =>
-          element.producer
-              .toString()
+      productBoxList.removeWhere((element) => element.category
+          .toLowerCase()
+          .replaceAll(" ", "")
+          .contains(event.searchText.toLowerCase().replaceAll(" ", "")));
+        listOfProductsValues += productBoxList
+          .where((element) => element.producer
               .toLowerCase()
               .replaceAll(" ", "")
-              .contains(event.searchText.replaceAll(" ", "").toLowerCase()))
+              .contains(event.searchText.toLowerCase().replaceAll(" ", "")))
           .toList();
+      productBoxList.removeWhere((element) => element.producer
+          .toLowerCase()
+          .replaceAll(" ", "")
+          .contains(event.searchText.toLowerCase().replaceAll(" ", "")));
 
       yield LoadedProductsListSearchState(listOfProductsValues);
     } else if (event is EditProductEvent) {
@@ -51,8 +60,8 @@ class ProductsListBloc extends Bloc<ProdcutsListEvent, ProductsListState> {
       Map productBox = Hive.box('products').toMap();
 
       var index = productBox.keys.firstWhere((key) =>
-      productBox[key].name.replaceAll(" ", "").toLowerCase() ==
-          event.oldproduct.name.replaceAll(" ", "").toLowerCase());
+          productBox[key].name.replaceAll(" ", "").toLowerCase() ==
+          event.oldProduct.name.replaceAll(" ", "").toLowerCase());
       Hive.box("products").put(index, event.product);
       yield LoadedProdcutsListState();
     }

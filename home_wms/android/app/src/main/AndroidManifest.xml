@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.home_wms">
+    package="com.homewms.home_wms">
    <application
-        android:label="home_wms"
+        android:label="HomeWMS"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

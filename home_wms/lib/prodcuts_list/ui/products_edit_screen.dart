@@ -60,17 +60,18 @@ class ProductEditScreenState extends State<ProductEditScreen> {
     productBarCodeFieldController.text = product.barcode;
     productPriceFieldController.text = product.price.toString();
 
-    listCategories = Hive
-        .box('categories')
-        .values
-        .toList();
+    
+    listCategories = Hive.box('categories').values.toList();
+
     listCategories.insert(0, 'Uncategorized');
+
     if (Hive
         .box('categories')
         .values
         .any(
-            (element) =>
-        element.toLowerCase() == product.category.toLowerCase())) {
+            (category) =>
+        category.toString().toLowerCase() == product.category.toLowerCase())) 
+        {
       choosenCategoryValue = product.category;
     } else {
       choosenCategoryValue = listCategories.first;
@@ -87,7 +88,7 @@ class ProductEditScreenState extends State<ProductEditScreen> {
         .box('producers')
         .values
         .any((element) =>
-    element.name.toLowerCase() == product.producer.toLowerCase())) {
+    element.name.toString().toLowerCase() == product.producer.toLowerCase())) {
       choosenProducerValue = Hive
           .box('producers')
           .values

@@ -25,10 +25,8 @@ class ProductsListScreenState extends State<ProductsListScreen> {
   }
 
   @override
-  void dispose()
-
+  void dispose() {
   productsBox.close();
-
   super.dispose();
 }
 
@@ -62,25 +60,23 @@ Widget _buildlistScreen() =>
       )
     ]);
 
-Widget _buildProductsList() {
-  return Expanded(
+Widget _buildProductsList() => Expanded(
       child: ListView.builder(
           itemCount: productsBox.length,
           itemBuilder: (context, index) {
             final product = productsBox.getAt(index) as Product;
             return _listTile(product);
           }));
-}
 
-Widget _listSearched(List listOfProducts) {
-  return Expanded(
+
+Widget _listSearched(List listOfProducts) => Expanded(
       child: ListView.builder(
         itemBuilder: (context, index) => _listTile(listOfProducts[index]),
         itemCount: listOfProducts.length,
       ));
-}
 
-Widget _listTile(product) =>
+
+Widget _listTile(Product product) =>
     Slidable(
         actions: <Widget>[
           IconSlideAction(
@@ -118,43 +114,28 @@ Widget _listTile(product) =>
                             offset: Offset(0, 4)),
                       ],
                     ),
-                    child: Column(children: [
-                      Text(
-                        product.name,
-                        textAlign: TextAlign.center,
-                      ),
-                      Row(children: [
-                        Column(children: [
-                          Text(
-                            'Category: ' + product.category,
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            'Producer: ' + product.producer,
-                            textAlign: TextAlign.left,
-                          )
-                        ]),
-                        Spacer(),
-                        Column(children: [
-                          Text(
-                            'Quantity:',
-                          ),
-                          Text(
-                            'Price:',
-                          )
-                        ]),
-                        Column(children: [
-                          Text(
-                            product.quantity.toString(),
-                            textAlign: TextAlign.right,
-                          ),
-                          Text(
-                            product.price.toString(),
-                            textAlign: TextAlign.right,
-                          )
-                        ])
-                      ])
-                    ])))));
+                    child: Column( children: [ 
+                      Text(product.name, textAlign: TextAlign.center,),
+                      Table(
+                    children: [
+                      TableRow(children:[
+                        Text('Category: '),
+                        Text(product.category, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        Text('Quantity: '),
+                        Text(product.quantity.toString(), maxLines: 1, overflow: TextOverflow.ellipsis)
+
+                      ] ),
+                      TableRow(children:[
+                        Text('Producer: '),
+                        Text(product.producer, maxLines: 1, overflow: TextOverflow.ellipsis),
+                        Text('Price: '),
+                        Text(product.price.toString(), maxLines: 1, overflow: TextOverflow.ellipsis),] ),
+
+                    ],
+
+                    )
+                    ]
+                    )))));
 
 Widget _searchField() =>
     TextField(

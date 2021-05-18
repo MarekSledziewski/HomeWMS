@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:home_wms/Order/bloc/order_bloc.dart';
 import 'package:home_wms/add/bloc/add_bloc.dart';
 import 'package:home_wms/category/bloc/category_bloc.dart';
-import 'package:home_wms/delete/bloc/delete_bloc.dart';
 import 'package:home_wms/menu/ui/menu_screen.dart';
 import 'package:home_wms/model/producer/producer.dart';
 import 'package:home_wms/prodcuts_list/bloc/products_list_bloc.dart';
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<AddBloc>(
           create: (BuildContext context) => AddBloc(),
         ),
-        BlocProvider<DeleteBloc>(
-          create: (BuildContext context) => DeleteBloc(),
+        BlocProvider<OrderBloc>(
+          create: (BuildContext context) => OrderBloc(),
         ),
         BlocProvider<CategoryBloc>(
           create: (BuildContext context) => CategoryBloc(),

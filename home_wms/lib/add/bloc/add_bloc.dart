@@ -16,23 +16,23 @@ class AddBloc extends Bloc<AddEvent, AddState> {
 
   @override
   Stream<AddState> mapEventToState(AddEvent event) async* {
+
     if (event is AddProductEvent) {
       yield ProductAddingState();
       await Hive.openBox('products');
 
       Box productBox = Hive.box('products');
       Product product = event.product;
-      var listOfProductsValues = productBox.values.where((element) =>
-      element.name.replaceAll(" ", "").toLowerCase() ==
-          event.product.name.replaceAll(" ", "").toLowerCase());
 
-      if (listOfProductsValues.isEmpty) {
+      if (productBox.values.any((element) =>
+          element.name.replaceAll(" ", "").toLowerCase() ==
+          event.product.name.replaceAll(" ", "").toLowerCase())) {
         {
           product.name = event.product.name[0].toUpperCase() +
               event.product.name.substring(1);
-
           productBox.add(product);
         }
+        
         Hive.box('products').close();
 
         yield ProdcutAddedState();
@@ -54,10 +54,11 @@ class AddBloc extends Bloc<AddEvent, AddState> {
   }
 
   _addQuantity(event) {
+    print('adding Quantity');
     Map productBox = Hive.box('products').toMap();
     if (productBox.values.any((product) => product.name == event.name)) {
       var index = productBox.keys.firstWhere((key) =>
-      productBox[key].name.toLowerCase() == event.name.toLowerCase());
+          productBox[key].name.toLowerCase() == event.name.toLowerCase());
       Product product;
       product = productBox[index];
       product.quantity = event.quantity + product.quantity;
@@ -69,7 +70,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
     Map productBox = Hive.box('products').toMap();
     if (productBox.values.any((product) => product.barcode == event.barcode)) {
       var index = productBox.keys.firstWhere((key) =>
-      productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
+          productBox[key].barcode.replaceAll(" ", "").toLowerCase() ==
           event.barcode.replaceAll(" ", "").toLowerCase());
       return Hive.box("products").get(index);
     } else
