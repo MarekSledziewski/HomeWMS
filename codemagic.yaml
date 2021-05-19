@@ -20,8 +20,9 @@ workflows:
           source: true
       cancel_previous_builds: false
     scripts:
-    name: Increment build number
-    script: agvtool new-version -all $(($PROJECT_BUILD_NUMBER +1))
+  - script1
+  - *increment_build_number       # Reused section
+  - script3
     artifacts:
       - build/**/outputs/**/*.aab
     publishing:
