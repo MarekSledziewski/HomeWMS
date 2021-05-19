@@ -8,12 +8,6 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
-      name: Get Flutter packages
-        script: flutter packages pub get
-       name: Flutter analyze
-         script: flutter analyze
-      name: Build debug iOS app
-        script: flutter build ios --debug --no-codesign
     artifacts:
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
