@@ -10,7 +10,6 @@ part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc() : super(OrderInitial());
-  final List<Product> _listOfProductsInBasket = [];
 
   @override
   Stream<OrderState> mapEventToState(

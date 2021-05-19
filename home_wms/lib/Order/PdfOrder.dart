@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:home_wms/model/products/products.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -12,8 +12,8 @@ class PdfOrder extends StatelessWidget {
   final pdf = pw.Document();
   late final String pdfPath;
   final List<Product> _listOfProducts;
-  List<List<String>> _arrayList = [];
-      List<String> _productHeaders = (['Name', 'Category', 'Producer', 'Quanity', 'Price', 'Barcode']);
+  final List<List<String>> _arrayList = [];
+  final List<String> _productHeaders = (['Name', 'Category', 'Producer', 'Quanity', 'Price', 'Barcode']);
 
   PdfOrder(this._listOfProducts) {
     _createPdf();
@@ -69,8 +69,7 @@ class PdfOrder extends StatelessWidget {
             if (snapshot.hasError) {
               return throw (snapshot.error.toString());
             } else {
-              return PDFViewerScaffold(path: pdfPath);
-              ;
+              return PDFView(filePath: pdfPath,);
             }
           }
           return LoadingAnimation();

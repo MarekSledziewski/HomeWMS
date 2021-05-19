@@ -131,7 +131,7 @@ class OptionsScreenState extends State<OptionsScreen> {
                   'Scissors', 'Sharp Company', 12));
               Hive.box('products').add(new Product('Hair Scissors', 442,
                   '24124124124214', 'Scissors', 'Sharp Company', 2));
-              Hive.box('products').add(new Product('Papper Siscors', 210,
+              Hive.box('products').add(new Product('Papper Scissors', 210,
                   '6236356316', 'Scissors', 'Sharp Company', 9));
               Hive.box('products').add(new Product('Clippers', 42, '547575479',
                   'Scissors', 'Sharp Company', 3.5));

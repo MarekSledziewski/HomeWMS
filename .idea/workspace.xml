@@ -21,15 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="74a1afa9-697e-42ea-b906-bea7c59e2c90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/main/kotlin/com/example/home_wms/MainActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/bloc/products_list_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/prodcuts_list/ui/products_list_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/Order/PdfOrder.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/Order/PdfOrder.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/Order/bloc/order_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/Order/bloc/order_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/lib/options/ui/options_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home_wms/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/home_wms/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,13 +44,16 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
+    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$/home_wms/android" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$/home_wms/android" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/home_wms/android" />
-    <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -108,41 +107,45 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1619962759384">
+    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621417473416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962759384" />
+    <state x="350" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621417473416" />
     <state x="676" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620071657865">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="676" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1620071657865" />
-    <state x="296" y="118" width="1200" height="800" key="AVDManager" timestamp="1619089772119">
+    <state x="296" y="118" width="1200" height="800" key="AVDManager" timestamp="1621418403471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="296" y="118" width="1200" height="800" key="AVDManager/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619089772119" />
-    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1619962736461">
+    <state x="296" y="118" width="1200" height="800" key="AVDManager/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621418403471" />
+    <state x="676" y="273" key="FileChooserDialogImpl" timestamp="1621344459648">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962736461" />
-    <state width="1882" height="279" key="GridCell.Tab.0.bottom" timestamp="1619962823720">
+    <state x="676" y="273" key="FileChooserDialogImpl/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621344459648" />
+    <state width="1881" height="279" key="GridCell.Tab.0.bottom" timestamp="1621344460644">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
-    <state width="1882" height="279" key="GridCell.Tab.0.center" timestamp="1619962823720">
+    <state width="1881" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621344460644" />
+    <state width="1881" height="279" key="GridCell.Tab.0.center" timestamp="1621344460644">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
-    <state width="1882" height="279" key="GridCell.Tab.0.left" timestamp="1619962823720">
+    <state width="1881" height="279" key="GridCell.Tab.0.center/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621344460644" />
+    <state width="1881" height="279" key="GridCell.Tab.0.left" timestamp="1621344460644">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
-    <state width="1882" height="279" key="GridCell.Tab.0.right" timestamp="1619962823720">
+    <state width="1881" height="279" key="GridCell.Tab.0.left/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621344460644" />
+    <state width="1881" height="279" key="GridCell.Tab.0.right" timestamp="1621344460644">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619962823720" />
-    <state x="397" y="163" key="SettingsEditor" timestamp="1619949349235">
+    <state width="1881" height="279" key="GridCell.Tab.0.right/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621344460644" />
+    <state x="397" y="163" key="SettingsEditor" timestamp="1621418991160">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="397" y="163" key="SettingsEditor/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1619949349235" />
+    <state x="397" y="163" key="SettingsEditor/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621418991160" />
+    <state x="620" y="243" key="run.anything.popup" timestamp="1621418128477">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="620" y="243" key="run.anything.popup/0.0.1920.1040/-1600.177.1600.860@0.0.1920.1040" timestamp="1621418128477" />
   </component>
 </project>
