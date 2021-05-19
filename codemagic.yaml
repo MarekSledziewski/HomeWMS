@@ -9,7 +9,7 @@ workflows:
       cocoapods: default
     scripts:
       - name: Set up local properties
-         script: |
+         script:
           echo $FCI_KEYSTORE | base64 --decode > /tmp/keystore.keystore
           cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
           storePassword=$FCI_KEYSTORE_PASSWORD
