@@ -7,6 +7,15 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
+       scripts:
+      - name: Set up local properties
+        script: echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - name: Get Flutter packages
+        script: flutter packages pub get
+      - name: Install Podfiles
+        script: find . -name "Podfile" -execdir pod install \;
+      - name: Build debug iOS app
+        script: flutter build ios --debug --no-codesign
     artifacts:
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
