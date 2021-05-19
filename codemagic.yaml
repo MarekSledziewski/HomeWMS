@@ -7,7 +7,6 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-    scripts:
     artifacts:
       - build/**/outputs/**/mapping.txt
       - build/ios/ipa/*.ipa
