@@ -7,7 +7,7 @@ workflows:
       flutter: stable
       xcode: latest
       cocoapods: default
-       scripts:
+    scripts:
       - name: Set up local properties
         script: echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
